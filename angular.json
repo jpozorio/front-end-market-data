@@ -70,11 +70,13 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "front-end-market-data:build"
+            "browserTarget": "front-end-market-data:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "front-end-market-data:build:production"
+              "browserTarget": "front-end-market-data:build:production",
+              "proxyConfig": "proxy.conf.json"
             }
           }
         },
