@@ -1,44 +1,90 @@
 <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!-- Position Column -->
-  <ng-container matColumnDef="position">
-    <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.day}} </mat-cell>
+  <ng-container matColumnDef="day">
+    <mat-header-cell *matHeaderCellDef> Data</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.day | date:'dd/MM/yyyy' }} </mat-cell>
   </ng-container>
 
   <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef> Contrato </mat-header-cell>
+  <ng-container matColumnDef="instrument">
+    <mat-header-cell *matHeaderCellDef> Contrato</mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.instrument}} </mat-cell>
   </ng-container>
 
   <!-- Weight Column -->
-  <ng-container matColumnDef="weight">
-    <mat-header-cell *matHeaderCellDef> Abertura </mat-header-cell>
+  <ng-container matColumnDef="first_price">
+    <mat-header-cell *matHeaderCellDef> Abertura</mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.first_price}} </mat-cell>
   </ng-container>
 
   <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <mat-header-cell *matHeaderCellDef> Fechamento </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.last_price}} </mat-cell>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <mat-header-cell *matHeaderCellDef> Mínima </mat-header-cell>
+  <ng-container matColumnDef="min_price">
+    <mat-header-cell *matHeaderCellDef> Mínima</mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.min_price}} </mat-cell>
   </ng-container>
 
   <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <mat-header-cell *matHeaderCellDef> Máxima </mat-header-cell>
+  <ng-container matColumnDef="max_price">
+    <mat-header-cell *matHeaderCellDef> Máxima</mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.max_price}} </mat-cell>
   </ng-container>
 
   <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <mat-header-cell *matHeaderCellDef> Ajuste </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.ajuste}} </mat-cell>
+  <ng-container matColumnDef="last_price">
+    <mat-header-cell *matHeaderCellDef> Fechamento</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <div style="display: flex; flex-wrap: wrap;flex-direction: column">
+        <div style="padding: 10px; display: flex;">
+          <div style="padding: 5px; display: flex;">-1.0%</div>
+          <div style="padding: 5px; display: flex;">{{(element.last_price - element.last_price * 0.01)|number:'1.2-2'}}</div>
+        </div>
+        <div style="padding: 10px; display: flex;">
+          <div style="padding: 5px; display: flex;">-0.5%</div>
+          <div style="padding: 5px; display: flex;">{{(element.last_price - element.last_price * 0.005)|number:'1.2-2'}}</div>
+        </div>
+        <div style="padding: 10px; display: flex;">
+          <div style="padding: 5px; display: flex;">&nbsp;0.0%</div>
+          <div style="padding: 5px; display: flex;">{{element.last_price}}</div>
+        </div>
+        <div style="padding: 10px; display: flex;">
+          <div style="padding: 5px; display: flex;">+0.5%</div>
+          <div style="padding: 5px; display: flex;">{{(element.last_price + element.last_price * 0.005)|number:'1.2-2'}}</div>
+        </div>
+        <div style="padding: 10px; display: flex;">
+          <div style="padding: 5px; display: flex;">+1.0%</div>
+          <div style="padding: 5px; display: flex;">{{(element.last_price + element.last_price * 0.01)|number:'1.2-2'}}</div>
+        </div>
+      </div>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="ajuste">
+    <mat-header-cell *matHeaderCellDef> Ajuste</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <div style="display: flex; flex-wrap: wrap;flex-direction: column">
+        <div style="padding: 10px; display: flex;">
+          <div style="padding: 5px; display: flex;">-1.0%</div>
+          <div style="padding: 5px; display: flex;">{{(element.ajuste - element.ajuste * 0.01)|number:'1.2-2'}}</div>
+        </div>
+        <div style="padding: 10px; display: flex;">
+          <div style="padding: 5px; display: flex;">-0.5%</div>
+          <div style="padding: 5px; display: flex;">{{(element.ajuste - element.ajuste * 0.005)|number:'1.2-2'}}</div>
+        </div>
+        <div style="padding: 10px; display: flex;">
+          <div style="padding: 5px; display: flex;">&nbsp;0.0%</div>
+          <div style="padding: 5px; display: flex;">{{element.ajuste}}</div>
+        </div>
+        <div style="padding: 10px; display: flex;">
+          <div style="padding: 5px; display: flex;">+0.5%</div>
+          <div style="padding: 5px; display: flex;">{{(element.ajuste + element.ajuste * 0.005)|number:'1.2-2'}}</div>
+        </div>
+        <div style="padding: 10px; display: flex;">
+          <div style="padding: 5px; display: flex;">+1.0%</div>
+          <div style="padding: 5px; display: flex;">{{(element.ajuste + element.ajuste * 0.01)|number:'1.2-2'}}</div>
+        </div>
+      </div>
+    </mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

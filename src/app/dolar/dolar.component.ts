@@ -9,7 +9,15 @@ import {ApiService} from '../api.service';
 export class DolarComponent implements OnInit {
 
   dataSource;
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = [
+    'day',
+    'instrument',
+    'first_price',
+    'min_price',
+    'max_price',
+    'last_price',
+    'ajuste',
+  ];
 
   constructor(public apiService: ApiService) {
   }

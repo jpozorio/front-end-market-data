@@ -1,3 +1,4 @@
+import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -39,9 +40,11 @@ import {StocksComponent} from './stocks/stocks.component';
     MatToolbarModule,
     MatIconModule,
     MatListModule,
+    HttpClientModule,
   ],
   providers   : [
     ApiService,
+    HttpClientModule,
   ],
   bootstrap   : [AppComponent],
 })

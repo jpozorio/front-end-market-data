@@ -11,7 +11,7 @@ export class ApiService {
   }
 
   getDolarData(): Observable<any> {
-    return this.http.get('');
+    return this.http.get('/marked-data/dolar/dadosDolar');
   }
 
 }
