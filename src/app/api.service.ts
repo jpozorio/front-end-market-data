@@ -14,4 +14,12 @@ export class ApiService {
     return this.http.get('/marked-data/dolar/dadosDolar');
   }
 
+  getStocksData(): Observable<any> {
+    return this.http.get('/marked-data/dolar/ativosDayTrade');
+  }
+
+  update() {
+    return this.http.get('/marked-data/dolar/download').subscribe(r => {
+    });
+  }
 }

@@ -1,1 +1,30 @@
-Em breve!
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="instrument">
+    <mat-header-cell *matHeaderCellDef> Ação</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.instrument}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="preco_medio">
+    <mat-header-cell *matHeaderCellDef> Preço médio</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.preco_medio|number:'1.2-2'}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="menor_variacao">
+    <mat-header-cell *matHeaderCellDef> Menor variação</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.menor_variacao|number:'1.2-2'}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="maior_variacao">
+    <mat-header-cell *matHeaderCellDef> Maior variação</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.maior_variacao|number:'1.2-2'}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="volume_medio">
+    <mat-header-cell *matHeaderCellDef> Volume médio</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.volume_medio|number:'1.2-2'}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
