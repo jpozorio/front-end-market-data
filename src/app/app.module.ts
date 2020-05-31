@@ -1,6 +1,7 @@
 import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
@@ -27,7 +28,7 @@ import {StocksComponent} from './stocks/stocks.component';
     StocksComponent,
     IrCalculatorComponent,
   ],
-  imports     : [
+  imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -41,6 +42,7 @@ import {StocksComponent} from './stocks/stocks.component';
     MatIconModule,
     MatListModule,
     HttpClientModule,
+    MatCardModule,
   ],
   providers   : [
     ApiService,
