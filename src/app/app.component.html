@@ -5,7 +5,12 @@
     </button>
     <h1>Informações mercado</h1>
     <span class="menu-spacer"></span>
-    <button style="position: absolute;right: 10px" mat-button (click)="apiService.update()"><mat-icon>refresh</mat-icon>Atualizar</button>
+    <button *ngIf="!atualizando" style="position: absolute;right: 10px" mat-button (click)="downloadData()">
+      <mat-icon>update</mat-icon>&nbsp;Atualizar
+    </button>
+    <button *ngIf="atualizando" style="position: absolute;right: 10px" mat-button>
+      <mat-icon class="spin-icon">refresh</mat-icon>&nbsp;Atualizando...
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -13,10 +18,18 @@
   <mat-sidenav #sidenav fixedInViewport="true">
     <mat-nav-list>
 
-      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/dolar'"> <mat-icon>attach_money</mat-icon> Fechamento dólar </a>
-      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/stocks'"> <mat-icon>receipt</mat-icon> Ações </a>
-      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/ir-calculator'"><mat-icon>calculate</mat-icon> Calculadora de IR </a>
-      <a mat-list-item (click)="sidenav.toggle()" href=""><mat-icon>close</mat-icon>Fechar</a>
+      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/dolar'">
+        <mat-icon>attach_money</mat-icon>
+        Fechamento dólar </a>
+      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/stocks'">
+        <mat-icon>receipt</mat-icon>
+        Ações </a>
+      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/ir-calculator'">
+        <mat-icon>calculate</mat-icon>
+        Calculadora de IR </a>
+      <a mat-list-item (click)="sidenav.toggle()" href="">
+        <mat-icon>close</mat-icon>
+        Fechar</a>
 
     </mat-nav-list>
   </mat-sidenav>

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from '../api.service';
+import {DolarService} from './dolar.service';
 
 @Component({
   selector   : 'app-quotes-view',
@@ -11,15 +11,7 @@ export class DolarComponent implements OnInit {
   BACKGROUND_COLOR_LAST_PRICE = 'background-color: #e3dfff';
   BACKGROUND_COLOR_AJUSTE = 'background-color: #d6efd1';
   BACKGROUND_COLOR_VARIATIONS = 'background-color: #ecec9357';
-  LAST_PRICE_LABEL = 'Fechamento';
-  AJUSTE_LABEL = 'Ajuste';
-  lastPrice;
-  ajustPrice;
-  currentContract;
-  maxPrice;
-  minPrice;
 
-  lastPriceAndAjuste;
   lastPriceAndAjusteColumns: string[] = [
     'label',
     '-2.0 %',
@@ -33,7 +25,6 @@ export class DolarComponent implements OnInit {
     '+2.0 %',
   ];
 
-  dataSource;
   displayedColumns: string[] = [
     'day',
     'instrument',
@@ -44,28 +35,41 @@ export class DolarComponent implements OnInit {
     'last_price',
   ];
 
-  constructor(public apiService: ApiService) {
+  constructor(
+    public dolarService: DolarService,
+  ) {
   }
 
   ngOnInit(): void {
-    this.apiService.getDolarData().subscribe(resp => {
-      this.dataSource = resp;
-      const firstData = resp[0];
-      this.lastPrice = {price: firstData.last_price, label: this.LAST_PRICE_LABEL};
-      this.ajustPrice = {price: firstData.ajuste, label: this.AJUSTE_LABEL};
-      this.maxPrice = firstData.maxima_contrato;
-      this.minPrice = firstData.minima_contrato;
-      this.currentContract = firstData.instrument;
-      this.lastPriceAndAjuste = [this.lastPrice, this.ajustPrice];
-    });
+    this.dolarService.subscribeDolarData();
   }
 
   getLastPriceStyle(element): string {
-    if (element.label === this.LAST_PRICE_LABEL) {
+    if (element.label === this.dolarService.LAST_PRICE_LABEL) {
       return this.BACKGROUND_COLOR_LAST_PRICE;
     } else {
       return this.BACKGROUND_COLOR_AJUSTE;
     }
+  }
+
+  get dataSource() {
+    return this.dolarService.dataSource;
+  }
+
+  get currentContract() {
+    return this.dolarService.currentContract;
+  }
+
+  get maxPrice() {
+    return this.dolarService.maxPrice;
+  }
+
+  get minPrice() {
+    return this.dolarService.minPrice;
+  }
+
+  get lastPriceAndAjuste() {
+    return this.dolarService.lastPriceAndAjuste;
   }
 
 }

@@ -18,8 +18,10 @@ import {ApiService} from './api.service';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {DolarComponent} from './dolar/dolar.component';
+import {DolarService} from './dolar/dolar.service';
 import {IrCalculatorComponent} from './ir-calculator/ir-calculator.component';
 import {StocksComponent} from './stocks/stocks.component';
+import {StockService} from './stocks/stocks.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,7 @@ import {StocksComponent} from './stocks/stocks.component';
     StocksComponent,
     IrCalculatorComponent,
   ],
-  imports: [
+  imports     : [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -47,6 +49,8 @@ import {StocksComponent} from './stocks/stocks.component';
   providers   : [
     ApiService,
     HttpClientModule,
+    DolarService,
+    StockService,
   ],
   bootstrap   : [AppComponent],
 })
