@@ -16,12 +16,6 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Comando para deploy. Ao fazer deploy, substitua o `type="module"` por `type="application/javascript"` no `index.html`
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+` heroku container:push web -a b3-dol-ui; heroku container:release web -a b3-dol-ui`
