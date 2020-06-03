@@ -84,7 +84,7 @@
   <!-- Position Column -->
   <ng-container matColumnDef="day">
     <mat-header-cell *matHeaderCellDef> Data</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.day | date:'dd/MM/yyyy' }} </mat-cell>
+    <mat-cell *matCellDef="let element"> {{element.day | date:'dd/MM/yyyy':'UTC' }} </mat-cell>
   </ng-container>
 
   <!-- Name Column -->
