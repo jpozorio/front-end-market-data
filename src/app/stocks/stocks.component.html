@@ -1,5 +1,10 @@
 <mat-table [dataSource]="this.stockSerivce.dataSource" class="mat-elevation-z8">
 
+  <ng-container matColumnDef="#">
+    <mat-header-cell *matHeaderCellDef> #</mat-header-cell>
+    <mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </mat-cell>
+  </ng-container>
+
   <ng-container matColumnDef="instrument">
     <mat-header-cell *matHeaderCellDef> Ação</mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.instrument}} </mat-cell>
@@ -18,6 +23,11 @@
   <ng-container matColumnDef="maior_variacao">
     <mat-header-cell *matHeaderCellDef> Maior variação</mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.maior_variacao|number:'1.2-2'}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="ultima_variacao">
+    <mat-header-cell *matHeaderCellDef> Última variação</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.ultima_variacao|number:'1.2-2'}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="volume_medio">

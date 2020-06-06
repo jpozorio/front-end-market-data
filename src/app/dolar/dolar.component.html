@@ -4,10 +4,10 @@
       <div style="padding: 10px;margin: 5px">
         Contrato vigente: <b>{{currentContract}}</b>
       </div>
-      <div style="padding: 10px; background-color: #0066ff3b;margin: 5px">
+      <div style="padding: 10px;margin: 5px" class="maxima-contrato">
         Máxima contrato: <b>{{maxPrice|number:'1.2-2'}}</b>
       </div>
-      <div style="padding: 10px; background-color: #f1d1d173;margin: 5px">
+      <div style="padding: 10px; margin: 5px" class="minima-contrato">
         Mínima contrato: <b>{{minPrice|number:'1.2-2'}}</b>
       </div>
     </div>
@@ -33,31 +33,31 @@
       </ng-container>
       <ng-container matColumnDef="-1.0 %">
         <mat-header-cell *matHeaderCellDef> -1.0 %</mat-header-cell>
-        <mat-cell *matCellDef="let element" [style]="BACKGROUND_COLOR_VARIATIONS">
+        <mat-cell *matCellDef="let element" [class]="getVariacaoStyle(element,1)">
           {{(element.price - element.price * 0.01)|number:'1.2-2'}}
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="-0.5 %">
         <mat-header-cell *matHeaderCellDef> -0.5 %</mat-header-cell>
-        <mat-cell *matCellDef="let element" [style]="BACKGROUND_COLOR_VARIATIONS">
+        <mat-cell *matCellDef="let element" [class]="getVariacaoStyle(element,0.5)">
           {{(element.price - element.price * 0.005)|number:'1.2-2'}}
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef=" 0.0 %">
         <mat-header-cell *matHeaderCellDef> 0.0 %</mat-header-cell>
-        <mat-cell *matCellDef="let element" [style]="getLastPriceStyle(element)">
+        <mat-cell *matCellDef="let element" [class]="getLastPriceStyle(element)">
           {{(element.price)|number:'1.2-2'}}
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="+0.5 %">
         <mat-header-cell *matHeaderCellDef> +0.5 %</mat-header-cell>
-        <mat-cell *matCellDef="let element" [style]="BACKGROUND_COLOR_VARIATIONS">
+        <mat-cell *matCellDef="let element" [class]="getVariacaoStyle(element,0.5)">
           {{(element.price + element.price * 0.005)|number:'1.2-2'}}
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="+1.0 %">
         <mat-header-cell *matHeaderCellDef> +1.0 %</mat-header-cell>
-        <mat-cell *matCellDef="let element" [style]="BACKGROUND_COLOR_VARIATIONS">
+        <mat-cell *matCellDef="let element" [class]="getVariacaoStyle(element,1)">
           {{(element.price + element.price * 0.01)|number:'1.2-2'}}
         </mat-cell>
       </ng-container>
@@ -80,53 +80,74 @@
   </div>
 </mat-card>
 
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <!-- Position Column -->
-  <ng-container matColumnDef="day">
-    <mat-header-cell *matHeaderCellDef> Data</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.day | date:'dd/MM/yyyy':'UTC' }} </mat-cell>
-  </ng-container>
+<mat-card>
+  <div style="display: flex; justify-content: space-between">
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="instrument">
-    <mat-header-cell *matHeaderCellDef> Contrato</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.instrument}} </mat-cell>
-  </ng-container>
+    <mat-table [dataSource]="dataSourceDI" style="width: 15%; margin-right: 20px" class="mat-elevation-z8" title="Contratos de DI com maior liquidez">
+      <ng-container matColumnDef="instrument">
+        <mat-header-cell *matHeaderCellDef> Contrato</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.instrument}} </mat-cell>
+      </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="first_price">
-    <mat-header-cell *matHeaderCellDef> Abertura</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.first_price|number:'1.2-2'}} </mat-cell>
-  </ng-container>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="volume">
+        <mat-header-cell *matHeaderCellDef> Volume</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.volume|number:'1.0-0'}} </mat-cell>
+      </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="min_price">
-    <mat-header-cell *matHeaderCellDef> Mínima</mat-header-cell>
-    <mat-cell *matCellDef="let element" [style]="element.min_price == minPrice ? ' background-color: #f1d1d173':''"> {{element.min_price|number:'1.2-2'}} </mat-cell>
-  </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumnsDI"></mat-header-row>
+      <mat-row *matRowDef="let row; let i = index; columns: displayedColumnsDI;" [class]="i == 0 ? 'maior-liquidez-di':''"></mat-row>
+    </mat-table>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="max_price">
-    <mat-header-cell *matHeaderCellDef> Máxima</mat-header-cell>
-    <mat-cell *matCellDef="let element" [style]="element.max_price == maxPrice ? ' background-color: #0066ff3b':''"> {{element.max_price|number:'1.2-2'}}</mat-cell>
-  </ng-container>
+    <mat-table [dataSource]="dataSource" style="width: 85%; padding-right: 20px" class="mat-elevation-z8">
+      <!-- Position Column -->
+      <ng-container matColumnDef="day">
+        <mat-header-cell *matHeaderCellDef> Data</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.day | date:'dd/MM/yyyy':'UTC' }} </mat-cell>
+      </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="last_price">
-    <mat-header-cell *matHeaderCellDef> Fechamento</mat-header-cell>
-    <mat-cell *matCellDef="let element; let i = index" [style]="i == 0 ? BACKGROUND_COLOR_LAST_PRICE:''">
-      {{element.last_price|number:'1.2-2'}}
-    </mat-cell>
-  </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="instrument">
+        <mat-header-cell *matHeaderCellDef> Contrato</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.instrument}} </mat-cell>
+      </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="ajuste">
-    <mat-header-cell *matHeaderCellDef> Ajuste</mat-header-cell>
-    <mat-cell *matCellDef="let element; let i = index" [style]="i == 0 ? BACKGROUND_COLOR_AJUSTE:''">
-      {{ element.ajuste |number:'1.2-2'}}
-    </mat-cell>
-  </ng-container>
+      <!-- Weight Column -->
+      <ng-container matColumnDef="first_price">
+        <mat-header-cell *matHeaderCellDef> Abertura</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.first_price|number:'1.2-2'}} </mat-cell>
+      </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="min_price">
+        <mat-header-cell *matHeaderCellDef> Mínima</mat-header-cell>
+        <mat-cell *matCellDef="let element" [class]="element.min_price == minPrice ? 'minima-contrato':''"> {{element.min_price|number:'1.2-2'}} </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="max_price">
+        <mat-header-cell *matHeaderCellDef> Máxima</mat-header-cell>
+        <mat-cell *matCellDef="let element" [class]="element.max_price == maxPrice ? 'maxima-contrato':''"> {{element.max_price|number:'1.2-2'}}</mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="last_price">
+        <mat-header-cell *matHeaderCellDef> Fechamento</mat-header-cell>
+        <mat-cell *matCellDef="let element; let i = index" [class]="i == 0 ? BACKGROUND_COLOR_LAST_PRICE:''">
+          {{element.last_price|number:'1.2-2'}}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="ajuste">
+        <mat-header-cell *matHeaderCellDef> Ajuste</mat-header-cell>
+        <mat-cell *matCellDef="let element; let i = index" [class]="i == 0 ? 'ajuste':''">
+          {{ element.ajuste |number:'1.2-2'}}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</mat-card>

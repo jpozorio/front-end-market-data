@@ -1,3 +1,7 @@
+upstream market {
+  server b3-dol-data.herokuapp.com;
+}
+
 server {
   listen $PORT default_server;
 
@@ -5,4 +9,27 @@ server {
     root   /usr/share/nginx/html;
     index  index.html index.htm;
   }
+
+  location /market-data/ {
+    proxy_pass http://market/; # and slash here
+  }
+
+  location /dolar {
+    rewrite ^/dolar(.*) / break;
+    root   /usr/share/nginx/html;
+    index  index.html index.htm;
+  }
+
+  location /stocks {
+    rewrite ^/stocks(.*) / break;
+    root   /usr/share/nginx/html;
+    index  index.html index.htm;
+  }
+
+  location /ir-calculator {
+    rewrite ^/ir-calculator(.*) / break;
+    root   /usr/share/nginx/html;
+    index  index.html index.htm;
+  }
+
 }

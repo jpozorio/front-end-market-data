@@ -5,12 +5,14 @@
     </button>
     <h1>Informações mercado</h1>
     <span class="menu-spacer"></span>
-    <button *ngIf="!atualizando" style="position: absolute;right: 10px" mat-button (click)="downloadData()">
-      <mat-icon>update</mat-icon>&nbsp;Atualizar
-    </button>
-    <button *ngIf="atualizando" style="position: absolute;right: 10px" mat-button>
-      <mat-icon class="spin-icon">refresh</mat-icon>&nbsp;Atualizando...
-    </button>
+    <div *ngIf="adminMode" style="position: absolute;right: 10px">
+      <button *ngIf="!atualizando" mat-button (click)="downloadData()">
+        <mat-icon>update</mat-icon>&nbsp;Atualizar
+      </button>
+      <button *ngIf="atualizando" mat-button>
+        <mat-icon class="spin-icon">refresh</mat-icon>&nbsp;Atualizando...
+      </button>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -34,8 +36,6 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div style="height: 88vh;">
-      <router-outlet></router-outlet>
-    </div>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -9,10 +9,12 @@ import {StockService} from './stocks.service';
 export class StocksComponent implements OnInit {
 
   displayedColumns: string[] = [
+    '#',
     'instrument',
     'preco_medio',
     'menor_variacao',
     'maior_variacao',
+    'ultima_variacao',
     'volume_medio',
   ];
 

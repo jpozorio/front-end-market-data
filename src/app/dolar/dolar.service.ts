@@ -16,6 +16,7 @@ export class DolarService {
 
   lastPriceAndAjuste;
   dataSource;
+  dataSourceDI;
 
   constructor(public apiService: ApiService) {
   }
@@ -30,6 +31,10 @@ export class DolarService {
       this.minPrice = firstData.minima_contrato;
       this.currentContract = firstData.instrument;
       this.lastPriceAndAjuste = [lastPrice, ajustPrice];
+    });
+
+    this.apiService.getDIData().subscribe(resp => {
+      this.dataSourceDI = resp;
     });
   }
 }

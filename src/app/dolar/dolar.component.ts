@@ -8,9 +8,9 @@ import {DolarService} from './dolar.service';
 })
 export class DolarComponent implements OnInit {
 
-  BACKGROUND_COLOR_LAST_PRICE = 'background-color: #e3dfff';
-  BACKGROUND_COLOR_AJUSTE = 'background-color: #d6efd1';
-  BACKGROUND_COLOR_VARIATIONS = 'background-color: #ecec9357';
+  BACKGROUND_COLOR_LAST_PRICE = 'fechamento';
+  BACKGROUND_COLOR_AJUSTE = 'ajuste';
+  BACKGROUND_COLOR_VARIATIONS = 'variacoes';
 
   lastPriceAndAjusteColumns: string[] = [
     'label',
@@ -35,6 +35,11 @@ export class DolarComponent implements OnInit {
     'last_price',
   ];
 
+  displayedColumnsDI: string[] = [
+    'instrument',
+    'volume',
+  ];
+
   constructor(
     public dolarService: DolarService,
   ) {
@@ -52,8 +57,28 @@ export class DolarComponent implements OnInit {
     }
   }
 
+  getVariacaoStyle(element, variacao): string {
+    if (element.label === this.dolarService.LAST_PRICE_LABEL) {
+      if (variacao === 0.5) {
+        return 'fechamento05';
+      } else {
+        return 'fechamento1';
+      }
+    } else {
+      if (variacao === 0.5) {
+        return 'ajuste05';
+      } else {
+        return 'ajuste1';
+      }
+    }
+  }
+
   get dataSource() {
     return this.dolarService.dataSource;
+  }
+
+  get dataSourceDI() {
+    return this.dolarService.dataSourceDI;
   }
 
   get currentContract() {
