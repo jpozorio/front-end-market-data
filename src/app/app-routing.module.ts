@@ -5,6 +5,7 @@ import {IrCalculatorComponent} from './ir-calculator/ir-calculator.component';
 import {StocksComponent} from './stocks/stocks.component';
 
 const routes: Routes = [
+  {path: '', component: DolarComponent},
   {path: 'dolar', component: DolarComponent},
   {path: 'stocks', component: StocksComponent},
   {path: 'ir-calculator', component: IrCalculatorComponent},
