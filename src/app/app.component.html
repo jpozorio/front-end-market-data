@@ -17,8 +17,8 @@
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav #sidenav fixedInViewport="true" *ngIf="adminMode" >
-    <mat-nav-list>
+  <mat-sidenav #sidenav fixedInViewport="true" >
+    <mat-nav-list *ngIf="adminMode">
 
       <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/dolar'">
         <mat-icon>attach_money</mat-icon>
