@@ -97,4 +97,16 @@ export class DolarComponent implements OnInit {
     return this.dolarService.lastPriceAndAjuste;
   }
 
+  get variations(): any[] {
+    return this.dolarService.variations;
+  }
+
+  get variationsLastPrice(): any[] {
+    return this.dolarService.variationsLastPrice;
+  }
+
+  get variationsAjuste(): any[] {
+    return this.dolarService.variationsAjuste;
+  }
+
 }

@@ -17,6 +17,10 @@ export class DolarService {
   lastPriceAndAjuste;
   dataSource;
   dataSourceDI;
+  percentsToFill = [-3, -2.5, -2, -1.5, -1, -0.5, +0.5, +1, +1.5, +2, +2.5, +3];
+  variations = [];
+  variationsLastPrice = [];
+  variationsAjuste = [];
 
   constructor(public apiService: ApiService) {
   }
@@ -30,6 +34,22 @@ export class DolarService {
       this.maxPrice = firstData.maxima_contrato;
       this.minPrice = firstData.minima_contrato;
       this.currentContract = firstData.instrument;
+      for (const percent of this.percentsToFill) {
+        const labelFechamento = 'Fechamento';
+        const labelAjuste = 'Ajuste';
+        const valueToMultiply = (percent / 100);
+        const valueLastPrice = firstData.last_price + (firstData.last_price * valueToMultiply);
+        const valueAjuste = firstData.ajuste + (firstData.ajuste * valueToMultiply);
+        const itemLastPrice = {label: labelFechamento, value: valueLastPrice, numberVariation: percent};
+        const itemAjuste = {label: labelAjuste, value: valueAjuste, numberVariation: percent};
+        this.variations.push(itemLastPrice);
+        this.variations.push(itemAjuste);
+        this.variationsLastPrice.push(itemLastPrice);
+        this.variationsAjuste.push(itemAjuste);
+      }
+      this.variations.sort((a, b) => b.value - a.value);
+      this.variationsLastPrice.sort((a, b) => b.value - a.value);
+      this.variationsAjuste.sort((a, b) => b.value - a.value);
       this.lastPriceAndAjuste = [lastPrice, ajustPrice];
     });
 

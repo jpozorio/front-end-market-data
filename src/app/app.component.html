@@ -3,7 +3,7 @@
     <button mat-icon-button>
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
-    <h1>Informações mercado</h1>
+    <h1>Informações mercado de dólar</h1>
     <span class="menu-spacer"></span>
     <div *ngIf="adminMode" style="position: absolute;right: 10px">
       <button *ngIf="!atualizando" mat-button (click)="downloadData()">
@@ -17,7 +17,7 @@
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav #sidenav fixedInViewport="true">
+  <mat-sidenav #sidenav fixedInViewport="true" *ngIf="adminMode" >
     <mat-nav-list>
 
       <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/dolar'">

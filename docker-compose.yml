@@ -1,0 +1,45 @@
+version: '3'
+services:
+  database:
+    container_name: database
+    image: postgres:12
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: quotes
+      POSTGRES_USER: quotes
+      POSTGRES_PASSWORD: p@mEK5k;8+q\E?B7@,LMh:h*(>48vgIh
+    volumes:
+      - /home/jpozorio/docker/postgres:/var/lib/postgresql/data
+
+  front-end-dol:
+    container_name: front-end-dol
+    image: docker.pkg.github.com/jpozorio/front-end-market-data/front-end-market-data:0.2
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /home/jpozorio/docker/nginx/conf.d/:/etc/nginx/conf.d/
+      - /home/jpozorio/docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /home/jpozorio/docker/certbot/conf:/etc/letsencrypt
+      - /home/jpozorio/docker/certbot/www:/var/www/certbot
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+  quotes:
+    container_name: quotes
+    image: docker.pkg.github.com/jpozorio/market-data/market-data:0.1
+    restart: always
+    environment:
+      JDBC_DATABASE_URL: jdbc:postgresql://database:5432/quotes
+      DATABASE_USER: quotes
+      DATABASE_PASSWORD: p@mEK5k;8+q\E?B7@,LMh:h*(>48vgIh
+
+  certbot:
+    container_name: certbot
+    image: certbot/certbot
+    volumes:
+      - /home/jpozorio/docker/certbot/conf:/etc/letsencrypt
+      - /home/jpozorio/docker/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"

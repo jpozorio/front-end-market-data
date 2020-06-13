@@ -37,3 +37,16 @@ table {
 .maior-liquidez-di {
   background-color: #64d0cb61
 }
+
+.variacao-ajuste-fechamento {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.centralizado {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
