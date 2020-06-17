@@ -9,21 +9,6 @@
     <div style="padding: 10px; margin: 5px" class="minima-contrato">
       Mínima contrato: <b>{{minPrice|number:'1.2-2'}}</b>
     </div>
-    <mat-table [dataSource]="dataSourceDI" style="width: 100%; margin: 20px 20px 0 0" class="mat-elevation-z8" title="Contratos de DI com maior liquidez">
-      <ng-container matColumnDef="instrument">
-        <mat-header-cell *matHeaderCellDef> Contrato</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.instrument}} </mat-cell>
-      </ng-container>
-
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="volume">
-        <mat-header-cell *matHeaderCellDef> Volume</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.volume|number:'1.0-0'}} </mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumnsDI"></mat-header-row>
-      <mat-row *matRowDef="let row; let i = index; columns: displayedColumnsDI;" [class]="i == 0 ? 'maior-liquidez-di':''"></mat-row>
-    </mat-table>
   </div>
 
   <mat-table [dataSource]="dataSource" style="width: 75%; padding-right: 20px" class="mat-elevation-z8">
