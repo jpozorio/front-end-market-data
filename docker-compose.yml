@@ -15,7 +15,7 @@ services:
 
   front-end-dol:
     container_name: front-end-dol
-    image: docker.pkg.github.com/jpozorio/front-end-market-data/front-end-market-data:0.2
+    image: docker.pkg.github.com/jpozorio/front-end-market-data/front-end-market-data:1.0
     restart: always
     ports:
       - 80:80
@@ -29,7 +29,7 @@ services:
 
   quotes:
     container_name: quotes
-    image: docker.pkg.github.com/jpozorio/market-data/market-data:0.1
+    image: docker.pkg.github.com/jpozorio/market-data/market-data:0.2
     restart: always
     environment:
       JDBC_DATABASE_URL: jdbc:postgresql://database:5432/quotes

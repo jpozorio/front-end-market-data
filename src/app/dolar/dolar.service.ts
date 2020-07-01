@@ -27,6 +27,7 @@ export class DolarService {
 
   subscribeDolarData(): void {
     this.apiService.getDolarData().subscribe(resp => {
+      this.variations = [];
       this.dataSource = resp;
       const firstData = resp[0];
       const lastPrice = {price: firstData.last_price, label: this.LAST_PRICE_LABEL};
