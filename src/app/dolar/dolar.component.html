@@ -11,10 +11,10 @@
     </div>
 
     <mat-card style="align-items: center;justify-content: center">
-      <div class="ajuste centralizado" style="padding: 10px;">Pontos para observar</div>
+      <div class="maior-liquidez-di centralizado" style="padding: 10px;">Pontos para observar</div>
       <div *ngFor="let variation of variations">
         <div class="variacao-ajuste-fechamento">
-          <div>{{variation.value|number:'1.2-2'}}</div>
+          <div>{{variation.roundedValue|number:'1.2-2'}}</div>
         </div>
       </div>
     </mat-card>
@@ -54,7 +54,7 @@
     <!-- Symbol Column -->
     <ng-container matColumnDef="last_price">
       <mat-header-cell *matHeaderCellDef> Fechamento</mat-header-cell>
-      <mat-cell *matCellDef="let element; let i = index" [class]="i == 0 ? BACKGROUND_COLOR_LAST_PRICE:''">
+      <mat-cell *matCellDef="let element; let i = index" [class.fechamento]="i == 0">
         {{element.last_price|number:'1.2-2'}}
       </mat-cell>
     </ng-container>
@@ -62,13 +62,16 @@
     <!-- Symbol Column -->
     <ng-container matColumnDef="ajuste">
       <mat-header-cell *matHeaderCellDef> Ajuste</mat-header-cell>
-      <mat-cell *matCellDef="let element; let i = index" [class]="i == 0 ? 'ajuste':''">
+      <mat-cell *matCellDef="let element; let i = index" [class.ajuste]="i == 0">
         {{ element.ajuste |number:'1.2-2'}}
       </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+             [class.highlight]="selectedRowIndex == row.id"
+             (click)="fillVariatinsData(row)"
+    ></mat-row>
   </mat-table>
 
   <mat-card style="width: 12%;">
