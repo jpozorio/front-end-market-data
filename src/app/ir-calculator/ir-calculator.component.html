@@ -1,3 +1,32 @@
-<div>
-  Em breve!
+<div class="main">
+  <div class="coluna-imposto margin-50 border-1">
+    <div class="linha-imposto">
+      <div class="coluna-imposto titulo">Lucro bruto</div>
+      <div class="coluna-imposto titulo">Imposto retido</div>
+      <div class="coluna-imposto titulo">Imposto total</div>
+      <div class="coluna-imposto titulo">Lucro líquido</div>
+      <div class="coluna-imposto titulo">Imposto Devido</div>
+    </div>
+    <div class="linha-imposto">
+      <div class="coluna-imposto">R$ {{brutoDayTrade|number:'1.2-2'}}</div>
+      <div class="coluna-imposto">R$ {{impostoRetido|number:'1.2-2'}}</div>
+      <div class="coluna-imposto">R$ {{impostoTotal|number:'1.2-2'}}</div>
+      <div class="coluna-imposto">R$ {{liquidoDayTrade|number:'1.2-2'}}</div>
+      <div class="coluna-imposto imposto-devido">R$ {{(impostoTotal-impostoRetido)|number:'1.2-2'}}</div>
+    </div>
+  </div>
+  <div class="linha-imposto">
+
+    <!--    <div class="coluna-imposto titulo">-->
+    <!--      <label for="file">Escolha o arquivo</label>-->
+    <!--    </div>-->
+    <div class="botao-importar">
+
+      <input type="file"
+             id="file"
+             (change)="handleFileInput($event.target.files)"
+      >
+      <button mat-flat-button color="primary" (click)="postFile(fileToUpload)">Enviar</button>
+    </div>
+  </div>
 </div>

@@ -1,8 +1,45 @@
-div {
-  width: 100%;
-  height: -webkit-fill-available;
+.main {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  flex: 1;
+  height: -webkit-fill-available;
+
+  padding: 40px;
+}
+
+.botao-importar {
   font-size: xx-large;
+}
+
+.titulo {
+  font-size: large;
+  background: blueviolet;
+}
+
+.margin-50 {
+  margin-bottom: 50px;
+}
+
+.border-1 {
+  border: 1px solid white;
+}
+
+.imposto-devido {
+  color: #fa7c01;
+}
+
+.coluna-imposto {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+
+}
+
+.linha-imposto {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+
+  align-items: center;
+  justify-content: space-between;
 }
