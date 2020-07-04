@@ -19,6 +19,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {DolarComponent} from './dolar/dolar.component';
 import {DolarService} from './dolar/dolar.service';
+import {DragDropDirective} from './drag-drop.directive';
 import {IrCalculatorComponent} from './ir-calculator/ir-calculator.component';
 import {StocksComponent} from './stocks/stocks.component';
 import {StockService} from './stocks/stocks.service';
@@ -29,6 +30,7 @@ import {StockService} from './stocks/stocks.service';
     DolarComponent,
     StocksComponent,
     IrCalculatorComponent,
+    DragDropDirective,
   ],
   imports     : [
     BrowserModule,

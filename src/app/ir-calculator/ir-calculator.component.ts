@@ -9,6 +9,7 @@ import {Component} from '@angular/core';
 export class IrCalculatorComponent {
 
   fileToUpload: File = null;
+  files: any[] = [];
   brutoDayTrade: 0.00;
   liquidoDayTrade: 0.00;
   impostoRetido: 0.00;
@@ -19,6 +20,18 @@ export class IrCalculatorComponent {
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
+  }
+
+  uploadFile(event) {
+    // tslint:disable-next-line:prefer-for-of
+    for (let index = 0; index < event.length; index++) {
+      const element = event[index];
+      this.files.push(element.name)
+    }
+  }
+
+  deleteAttachment(index) {
+    this.files.splice(index, 1);
   }
 
   postFile(fileToUpload: File): void {
