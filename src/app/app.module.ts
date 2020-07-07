@@ -5,6 +5,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTableModule} from '@angular/material/table';
@@ -32,22 +33,23 @@ import {StockService} from './stocks/stocks.service';
     IrCalculatorComponent,
     DragDropDirective,
   ],
-  imports     : [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-    MatSidenavModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatListModule,
-    HttpClientModule,
-    MatCardModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+        MatSidenavModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatTableModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatListModule,
+        HttpClientModule,
+        MatCardModule,
+        MatProgressSpinnerModule,
+    ],
   providers   : [
     ApiService,
     HttpClientModule,

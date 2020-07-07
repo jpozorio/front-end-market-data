@@ -1,11 +1,16 @@
-<div class="main">
-  <div class="coluna-imposto margin-50 border-1">
+<div class="main processando" *ngIf="processando">
+  <mat-spinner></mat-spinner>
+  <div>Processando</div>
+</div>
+
+<div class="main" *ngIf="!processando">
+  <div class="coluna-imposto margin-50" *ngIf="brutoDayTrade > 0">
     <div class="linha-imposto titulo-imposto">
       <div class="coluna-imposto">Lucro bruto</div>
       <div class="coluna-imposto">Imposto retido</div>
       <div class="coluna-imposto">Imposto total</div>
       <div class="coluna-imposto">Lucro líquido</div>
-      <div class="coluna-imposto">Imposto Devido</div>
+      <div class="coluna-imposto imposto-devido">Imposto Devido</div>
     </div>
     <div class="linha-imposto">
       <div class="coluna-imposto">R$ {{brutoDayTrade|number:'1.2-2'}}</div>
@@ -16,8 +21,8 @@
     </div>
   </div>
 
-  <div>
-    <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (fileDropped)="uploadFile($event)">
+  <div *ngIf="brutoDayTrade == 0">
+    <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (fileDropped)="uploadFile($event)" *ngIf="files.length==0">
       Arraste e solte suas notas de corretagem aqui!
       <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
     </div>
@@ -27,7 +32,7 @@
         <mat-icon>clear</mat-icon>
       </button>
     </div>
-    <div class="botao-importar">
+    <div class="botao-importar" *ngIf="files.length>0">
       <button mat-flat-button color="primary" (click)="postFile(fileToUpload)">Processar arquivos</button>
     </div>
   </div>

@@ -7,13 +7,13 @@ export class DragDropDirective {
 
   @Output() fileDropped = new EventEmitter<any>();
 
-  @HostBinding('style.background-color') private background = 'rebeccapurple';
-  @HostBinding('style.opacity') private opacity = '.5';
+  @HostBinding('style.background-color') private background = '#006064';
+  @HostBinding('style.opacity') private opacity = '1';
 
   @HostListener('dragover', ['$event']) onDragOver(evt) {
     evt.preventDefault();
     evt.stopPropagation();
-    this.background = '#9ecbec';
+    this.background = '#006064';
     this.opacity = '0.8';
   }
 
@@ -21,7 +21,7 @@ export class DragDropDirective {
   public onDragLeave(evt) {
     evt.preventDefault();
     evt.stopPropagation();
-    this.background = '#f5fcff';
+    this.background = '#006064';
     this.opacity = '1';
   }
 
@@ -29,7 +29,7 @@ export class DragDropDirective {
   public ondrop(evt) {
     evt.preventDefault();
     evt.stopPropagation();
-    this.background = '#f5fcff';
+    this.background = '#006064';
     this.opacity = '1';
     const files = evt.dataTransfer.files;
     if (files.length > 0) {
