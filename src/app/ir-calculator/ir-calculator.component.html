@@ -4,7 +4,25 @@
 </div>
 
 <div class="main" *ngIf="!processando">
-  <div class="coluna-imposto margin-50" *ngIf="brutoDayTrade > 0">
+  <div class="coluna-imposto margin-50" *ngIf="dayTradeSummaryDays.length > 0">
+    <div class="linha-imposto titulo-imposto">
+      <div class="coluna-imposto">Dia</div>
+      <div class="coluna-imposto">Lucro bruto</div>
+      <div class="coluna-imposto">Imposto retido</div>
+      <div class="coluna-imposto">Imposto total</div>
+      <div class="coluna-imposto">Lucro líquido</div>
+      <div class="coluna-imposto imposto-devido">Imposto Devido</div>
+    </div>
+    <div class="linha-imposto" *ngFor="let summary of dayTradeSummaryDays">
+      <div class="coluna-imposto">{{summary.day|date}}</div>
+      <div class="coluna-imposto">R$ {{summary.brutoDayTrade|number:'1.2-2'}}</div>
+      <div class="coluna-imposto">R$ {{summary.impostoRetido|number:'1.2-2'}}</div>
+      <div class="coluna-imposto">R$ {{summary.impostoTotal|number:'1.2-2'}}</div>
+      <div class="coluna-imposto">R$ {{summary.liquidoDayTrade|number:'1.2-2'}}</div>
+      <div class="coluna-imposto imposto-devido">R$ {{(summary.impostoTotal - summary.impostoRetido)|number:'1.2-2'}}</div>
+    </div>
+    <br/>
+    <div class="linha-imposto titulo-imposto coluna-imposto">Total</div>
     <div class="linha-imposto titulo-imposto">
       <div class="coluna-imposto">Lucro bruto</div>
       <div class="coluna-imposto">Imposto retido</div>
@@ -13,27 +31,27 @@
       <div class="coluna-imposto imposto-devido">Imposto Devido</div>
     </div>
     <div class="linha-imposto">
-      <div class="coluna-imposto">R$ {{brutoDayTrade|number:'1.2-2'}}</div>
-      <div class="coluna-imposto">R$ {{impostoRetido|number:'1.2-2'}}</div>
-      <div class="coluna-imposto">R$ {{impostoTotal|number:'1.2-2'}}</div>
-      <div class="coluna-imposto">R$ {{liquidoDayTrade|number:'1.2-2'}}</div>
-      <div class="coluna-imposto imposto-devido">R$ {{(impostoTotal - impostoRetido)|number:'1.2-2'}}</div>
+      <div class="coluna-imposto">R$ {{total.brutoDayTrade|number:'1.2-2'}}</div>
+      <div class="coluna-imposto">R$ {{total.impostoRetido|number:'1.2-2'}}</div>
+      <div class="coluna-imposto">R$ {{total.impostoTotal|number:'1.2-2'}}</div>
+      <div class="coluna-imposto">R$ {{total.liquidoDayTrade|number:'1.2-2'}}</div>
+      <div class="coluna-imposto imposto-devido">R$ {{(total.impostoTotal - total.impostoRetido)|number:'1.2-2'}}</div>
     </div>
   </div>
 
-  <div *ngIf="brutoDayTrade == 0">
+  <div *ngIf="dayTradeSummaryDays.length == 0">
     <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (fileDropped)="uploadFile($event)" *ngIf="files.length==0">
       Arraste e solte suas notas de corretagem aqui!
       <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
     </div>
     <div class="files-list" *ngFor="let file of files;let i= index">
-      <p> {{ file }} </p>
+      <p> {{ file.name }} </p>
       <button class="delete-file" (click)="deleteAttachment(i)">
         <mat-icon>clear</mat-icon>
       </button>
     </div>
     <div class="botao-importar" *ngIf="files.length>0">
-      <button mat-flat-button color="primary" (click)="postFile(fileToUpload)">Processar arquivos</button>
+      <button mat-flat-button color="primary" (click)="postFiles()">Processar arquivos</button>
     </div>
   </div>
 </div>
