@@ -68,6 +68,14 @@ export class IrCalculatorComponent {
 
     this.httpClient
         .post(endpoint, formData, {}).subscribe((resp: any) => {
+        this.total = {
+          day            : null,
+          brutoDayTrade  : 0.00,
+          liquidoDayTrade: 0.00,
+          impostoRetido  : 0.00,
+          impostoTotal   : 0.00,
+        };
+
         for (const el of resp) {
           const item: DaySummary = {
             day            : el.day,
