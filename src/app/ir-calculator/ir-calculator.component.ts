@@ -22,6 +22,15 @@ export class IrCalculatorComponent {
   total: DaySummary;
   processando = false;
 
+  displayedColumns: string[] = [
+    'day',
+    'brutoDayTrade',
+    'liquidoDayTrade',
+    'impostoRetido',
+    'impostoTotal',
+    'impostoDevido',
+  ];
+
   constructor(public httpClient: HttpClient) {
     this.processando = false;
     this.total = {
@@ -75,6 +84,7 @@ export class IrCalculatorComponent {
 
           this.dayTradeSummaryDays.push(item);
         }
+        this.dayTradeSummaryDays.push(this.total);
         this.processando = false;
       },
     )

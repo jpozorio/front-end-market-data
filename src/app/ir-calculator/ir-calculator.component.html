@@ -5,42 +5,59 @@
 
 <div class="main" *ngIf="!processando">
   <div class="coluna-imposto margin-50" *ngIf="dayTradeSummaryDays.length > 0">
-    <div class="linha-imposto titulo-imposto">
-      <div class="coluna-imposto">Dia</div>
-      <div class="coluna-imposto">Lucro bruto</div>
-      <div class="coluna-imposto">Imposto retido</div>
-      <div class="coluna-imposto">Imposto total</div>
-      <div class="coluna-imposto">Lucro líquido</div>
-      <div class="coluna-imposto imposto-devido">Imposto Devido</div>
-    </div>
-    <div class="linha-imposto" *ngFor="let summary of dayTradeSummaryDays">
-      <div class="coluna-imposto">{{summary.day|date}}</div>
-      <div class="coluna-imposto">R$ {{summary.brutoDayTrade|number:'1.2-2'}}</div>
-      <div class="coluna-imposto">R$ {{summary.impostoRetido|number:'1.2-2'}}</div>
-      <div class="coluna-imposto">R$ {{summary.impostoTotal|number:'1.2-2'}}</div>
-      <div class="coluna-imposto">R$ {{summary.liquidoDayTrade|number:'1.2-2'}}</div>
-      <div class="coluna-imposto imposto-devido">R$ {{(summary.impostoTotal - summary.impostoRetido)|number:'1.2-2'}}</div>
-    </div>
-    <br/>
-    <div class="linha-imposto titulo-imposto coluna-imposto">Total</div>
-    <div class="linha-imposto titulo-imposto">
-      <div class="coluna-imposto">Lucro bruto</div>
-      <div class="coluna-imposto">Imposto retido</div>
-      <div class="coluna-imposto">Imposto total</div>
-      <div class="coluna-imposto">Lucro líquido</div>
-      <div class="coluna-imposto imposto-devido">Imposto Devido</div>
-    </div>
-    <div class="linha-imposto">
-      <div class="coluna-imposto">R$ {{total.brutoDayTrade|number:'1.2-2'}}</div>
-      <div class="coluna-imposto">R$ {{total.impostoRetido|number:'1.2-2'}}</div>
-      <div class="coluna-imposto">R$ {{total.impostoTotal|number:'1.2-2'}}</div>
-      <div class="coluna-imposto">R$ {{total.liquidoDayTrade|number:'1.2-2'}}</div>
-      <div class="coluna-imposto imposto-devido">R$ {{(total.impostoTotal - total.impostoRetido)|number:'1.2-2'}}</div>
-    </div>
+
+    <mat-table [dataSource]="dayTradeSummaryDays" class="mat-elevation-z8">
+      <!-- Position Column -->
+      <ng-container matColumnDef="day">
+        <mat-header-cell *matHeaderCellDef> Dia</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.day ? (element.day | date:'dd/MM/yyyy':'UTC') : 'Total' }} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="brutoDayTrade">
+        <mat-header-cell *matHeaderCellDef> Lucro bruto</mat-header-cell>
+        <mat-cell *matCellDef="let element"> R$ {{element.brutoDayTrade|number:'1.2-2'}} </mat-cell>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="impostoRetido">
+        <mat-header-cell *matHeaderCellDef> Imposto retido</mat-header-cell>
+        <mat-cell *matCellDef="let element"> R$ {{element.impostoRetido|number:'1.2-2'}} </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="impostoTotal">
+        <mat-header-cell *matHeaderCellDef> Imposto total</mat-header-cell>
+        <mat-cell *matCellDef="let element"> R$ {{element.impostoTotal|number:'1.2-2'}} </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="liquidoDayTrade">
+        <mat-header-cell *matHeaderCellDef> Lucro líquido</mat-header-cell>
+        <mat-cell *matCellDef="let element"> R$ {{element.liquidoDayTrade|number:'1.2-2'}}</mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="impostoDevido">
+        <mat-header-cell *matHeaderCellDef> Imposto devido</mat-header-cell>
+        <mat-cell *matCellDef="let element; let i = index">
+          R$ {{(element.impostoTotal - element.impostoRetido)|number:'1.2-2'}}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"
+      ></mat-row>
+    </mat-table>
+
+    <button style="margin-top: 20px" color="green" mat-raised-button (click)="dayTradeSummaryDays = []; files = [];">
+      <mat-icon>add</mat-icon>
+      Importar outros
+    </button>
   </div>
 
   <div *ngIf="dayTradeSummaryDays.length == 0">
-    <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (fileDropped)="uploadFile($event)" *ngIf="files.length==0">
+    <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (fileDropped)="uploadFile($event)">
       Arraste e solte suas notas de corretagem aqui!
       <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
     </div>
