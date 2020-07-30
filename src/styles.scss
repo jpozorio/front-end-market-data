@@ -1,12 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body {
-  height: 100%;
+html {
+  height: 100vh;
+  display: flex;
 }
 
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  height: 100vh;
+  display: flex;
+  flex: 1;
+}
+
+.app-root-flex {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
 .mat-cell {
@@ -25,8 +35,27 @@ body {
 @include mat-core();
 
 $primary: mat-palette($mat-teal, 900);
-$accent: mat-palette($mat-orange, 200);
 
+$accent: mat-palette($mat-deep-orange, A700);
+
+$theme: mat-light-theme($primary, $accent);
+$font-color: map-get($mat-deep-orange, 50);
+
+$font-color: map-get($mat-deep-orange, 300);;
+$accent: mat-palette($mat-deep-orange, 300);
 $theme: mat-dark-theme($primary, $accent);
 
+$primary-text: $font-color;
+$secondary-text: map-get($mat-deep-orange, 50);
+
 @include angular-material-theme($theme);
+
+.mat-form-field-wrapper {
+  @extend .mat-form-field-wrapper;
+  flex: 1;
+  display: flex;
+}
+
+input {
+  color: $font-color !important;
+}

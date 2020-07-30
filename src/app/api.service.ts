@@ -34,4 +34,8 @@ export class ApiService {
   getDIData(): Observable<any> {
     return this.http.get('/market-data/dolar/dadosDI');
   }
+
+  createUser(user): Observable<any> {
+    return this.http.post('/market-data/user/create', user);
+  }
 }

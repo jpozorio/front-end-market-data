@@ -1,0 +1,73 @@
+<div>
+  <div class="login-form--container">
+    <div class="login-form--left">
+      <div class="login-form--foreground"></div>
+    </div>
+    <div class="login-form--right" id="login" *ngIf="login">
+      <div class="login-form--field">
+        <h1 class="login-form--title">Login</h1>
+      </div>
+      <div class="login-form--field">
+        <mat-form-field appearance="fill" class="login-form--field" color="accent">
+          <mat-label>Email</mat-label>
+          <input [(ngModel)]="email" type="email" id="email" name="email" matInput required>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill" class="login-form--field" color="accent">
+          <mat-label>Senha</mat-label>
+          <input [(ngModel)]="password" type="email" id="password" name="password" matInput required>
+        </mat-form-field>
+      </div>
+      <div class="login-form--flex-space-between">
+        <button class="login-form--flex-1-flex-center" mat-flat-button color="accent">Login</button>
+        <button class="login-form--flex-1-flex-center" mat-stroked-button color="accent" (click)="login=false">Criar conta</button>
+      </div>
+    </div>
+    <div class="login-form--right" id="criar" *ngIf="!login">
+      <div class="login-form--field">
+        <h1 class="login-form--title">Criar usuário</h1>
+      </div>
+      <div class="login-form--field">
+        <mat-form-field appearance="fill" class="login-form--field" color="accent">
+          <mat-label>Email</mat-label>
+          <input [(ngModel)]="email" type="email" name="email" matInput required>
+        </mat-form-field>
+      </div>
+      <div class="login-form--field">
+        <mat-form-field appearance="fill" class="login-form--field" color="accent">
+          <mat-label>Primeiro nome</mat-label>
+          <input [(ngModel)]="firstName" type="text" matInput required>
+        </mat-form-field>
+      </div>
+      <div class="login-form--field">
+        <mat-form-field appearance="fill" class="login-form--field" color="accent">
+          <mat-label>Último nome</mat-label>
+          <input [(ngModel)]="lastName" type="text" matInput required>
+        </mat-form-field>
+      </div>
+      <div class="login-form--field">
+        <mat-form-field appearance="fill" class="login-form--field" color="accent">
+          <mat-label>Senha</mat-label>
+          <input [(ngModel)]="password" [type]="hide ? 'password' : 'text'" matInput required>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="login-form--field">
+        <mat-form-field appearance="fill" class="login-form--field" color="accent">
+          <mat-label>Confirmação de senha</mat-label>
+          <input [(ngModel)]="passwordConfirmation" [type]="hide ? 'password' : 'text'" matInput required>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="login-form--flex-space-between">
+        <button class="login-form--flex-1-flex-center" mat-flat-button color="accent">Criar conta</button>
+        <button class="login-form--flex-1-flex-center" mat-stroked-button color="accent" (click)="login=true">Ir para login</button>
+      </div>
+    </div>
+  </div>
+</div>
