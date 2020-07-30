@@ -39,14 +39,21 @@ $primary: mat-palette($mat-teal, 900);
 $accent: mat-palette($mat-deep-orange, A700);
 
 $theme: mat-light-theme($primary, $accent);
-$font-color: map-get($mat-deep-orange, 50);
-
-$font-color: map-get($mat-deep-orange, 300);;
-$accent: mat-palette($mat-deep-orange, 300);
-$theme: mat-dark-theme($primary, $accent);
-
-$primary-text: $font-color;
+$font-color: black;
+$primary-text: map-get($mat-deep-orange, A700);
 $secondary-text: map-get($mat-deep-orange, 50);
+
+//dark-theme
+$font-color: map-get($mat-deep-orange, 50);
+$accent: mat-palette($mat-deep-orange, 300);
+
+$primary-text: map-get($mat-deep-orange, 300);;
+$secondary-text: map-get($mat-deep-orange, 50);
+
+$theme: mat-dark-theme($primary, $accent);
+//dark-theme
+
+
 
 @include angular-material-theme($theme);
 
