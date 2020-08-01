@@ -55,6 +55,10 @@ export class IrCalculatorComponent {
     this.files.splice(index, 1);
   }
 
+  clearFiles(): void {
+    this.files = [];
+  }
+
   postFiles(): void {
     const endpoint = '/market-data/ir-calculator/calculate';
     const formData: FormData = new FormData();

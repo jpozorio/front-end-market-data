@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+
+@mixin login-component-theme($theme) {
+
+  $primary: mat-color($theme, primary);
+
+  .login-form--title {
+    color: map-get($primary, default);
+  }
+}

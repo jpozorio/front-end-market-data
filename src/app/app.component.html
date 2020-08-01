@@ -5,19 +5,23 @@
     </button>
     <h1>IR para day trade</h1>
     <span class="menu-spacer"></span>
-    <div *ngIf="adminMode" style="position: absolute;right: 10px">
-      <button *ngIf="!atualizando" mat-button (click)="downloadData()">
+    <div style="position: absolute;right: 10px">
+      <button mat-button (click)="onSetTheme()">
+        <mat-icon>sync_alt</mat-icon>
+        Tema
+      </button>
+      <button *ngIf="adminMode && !atualizando" mat-button (click)="downloadData()">
         <mat-icon>update</mat-icon>&nbsp;Atualizar
       </button>
-      <button *ngIf="atualizando" mat-button>
+      <button *ngIf="adminMode && atualizando" mat-button>
         <mat-icon class="spin-icon">refresh</mat-icon>&nbsp;Atualizando...
       </button>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-sidenav-container>
-  <mat-sidenav #sidenav fixedInViewport="true">
+<mat-sidenav-container style="flex: 1">
+  <mat-sidenav #sidenav fixedInViewport="false" mode="over" opened="true" hasBackdrop="true">
     <mat-nav-list>
 
       <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/dolar'">
@@ -35,8 +39,5 @@
 
     </mat-nav-list>
   </mat-sidenav>
-</mat-sidenav-container>
-
-<div class="app-background">
   <router-outlet></router-outlet>
-</div>
+</mat-sidenav-container>

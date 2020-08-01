@@ -1,7 +1,4 @@
-@import '~@angular/material/theming';
 @import '../../styles';
-
-@include mat-core();
 
 .login-form--container {
   display: flex;
@@ -38,7 +35,6 @@
 }
 
 .login-form--title {
-  color: $primary-text;
   font-weight: bold;
 }
 

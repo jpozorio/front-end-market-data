@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "src/app/login/login.component.scss-theme";
 
 html {
   height: 100vh;
@@ -34,28 +35,15 @@ body {
 @import '~@angular/material/theming';
 @include mat-core();
 
-$primary: mat-palette($mat-teal, 900);
-
-$accent: mat-palette($mat-deep-orange, A700);
-
-$theme: mat-light-theme($primary, $accent);
-$font-color: black;
-$primary-text: map-get($mat-deep-orange, A700);
-$secondary-text: map-get($mat-deep-orange, 50);
+$light-primary: mat-palette($mat-deep-orange, A700);
+$light-accent: mat-palette($mat-deep-orange, A700);
+$light-theme: mat-light-theme($light-primary, $light-accent);
 
 //dark-theme
-$font-color: map-get($mat-deep-orange, 50);
-$accent: mat-palette($mat-deep-orange, 300);
-
-$primary-text: map-get($mat-deep-orange, 300);;
-$secondary-text: map-get($mat-deep-orange, 50);
-
-$theme: mat-dark-theme($primary, $accent);
+$dark-primary: mat-palette($mat-deep-orange, 300);
+$dark-accent: mat-palette($mat-deep-orange, 300);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent);
 //dark-theme
-
-
-
-@include angular-material-theme($theme);
 
 .mat-form-field-wrapper {
   @extend .mat-form-field-wrapper;
@@ -63,6 +51,12 @@ $theme: mat-dark-theme($primary, $accent);
   display: flex;
 }
 
-input {
-  color: $font-color !important;
+.app-dark-theme {
+  @include angular-material-theme($dark-theme);
+  @include login-component-theme($dark-theme);
+}
+
+.app-light-theme {
+  @include angular-material-theme($light-theme);
+  @include login-component-theme($light-theme);
 }
