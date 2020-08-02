@@ -38,4 +38,8 @@ export class ApiService {
   createUser(user): Observable<any> {
     return this.http.post('/market-data/user/create', user);
   }
+
+  authenticate(user): Observable<any> {
+    return this.http.post('/market-data/login', user);
+  }
 }

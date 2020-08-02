@@ -1,4 +1,4 @@
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
@@ -16,18 +16,25 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ServiceWorkerModule} from '@angular/service-worker';
+import {JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 import {environment} from '../environments/environment';
 import {ApiService} from './api.service';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {AuthGuardService} from './auth/auth-guard.service';
+import {AuthService} from './auth/auth.service';
+import {BasicAuthHtppInterceptorService} from './auth/basic-auth-htpp-interceptor.service';
 import {DolarComponent} from './dolar/dolar.component';
 import {DolarService} from './dolar/dolar.service';
-import {DragDropDirective} from './drag-drop.directive';
 import {IrCalculatorComponent} from './ir-calculator/ir-calculator.component';
 import {LoginComponent} from './login/login.component';
 import {StocksComponent} from './stocks/stocks.component';
 import {StockService} from './stocks/stocks.service';
+
+export function getToken(): string {
+  return sessionStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -35,10 +42,14 @@ import {StockService} from './stocks/stocks.service';
     DolarComponent,
     StocksComponent,
     IrCalculatorComponent,
-    DragDropDirective,
     LoginComponent,
   ],
   imports     : [
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: getToken,
+      },
+    }),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -59,11 +70,17 @@ import {StockService} from './stocks/stocks.service';
     MatSnackBarModule,
   ],
   providers   : [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: BasicAuthHtppInterceptorService, multi: true,
+    },
     ApiService,
     HttpClientModule,
     DolarService,
     StockService,
     MatSnackBar,
+    AuthService,
+    AuthGuardService,
+    JwtHelperService,
   ],
   bootstrap   : [AppComponent],
 })

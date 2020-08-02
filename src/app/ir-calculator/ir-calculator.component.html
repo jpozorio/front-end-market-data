@@ -57,19 +57,32 @@
   </div>
 
   <div *ngIf="dayTradeSummaryDays.length == 0">
-    <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (fileDropped)="uploadFile($event)">
+    <div
+      *ngIf="droping"
+      class="upload-all-page"
+      (drop)="uploadFileAllPage($event)"
+
+      (dragleave)="dragLeave($event)"
+      (dragover)="allowDrag($event)"
+      (dragenter)="allowDrag($event)"
+    >
+    </div>
+
+    <div class="uploadfilecontainer" (click)="fileInput.click()">
       Arraste e solte suas notas de corretagem aqui!
       <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
     </div>
-    <div class="files-list" *ngFor="let file of files;let i= index">
-      <p> {{ file.name }} </p>
-      <button class="delete-file" (click)="deleteAttachment(i)">
-        <mat-icon>clear</mat-icon>
-      </button>
+    <div class="files-list-container">
+      <div class="files-list" *ngFor="let file of files;let i= index">
+        <p> {{ file.name }} </p>
+        <button class="delete-file" (click)="deleteAttachment(i)">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </div>
     </div>
     <div class="botao-importar" *ngIf="files.length>0">
-      <button mat-flat-button color="accent" (click)="clearFiles()">Limpar arquivos</button>
-      <button mat-flat-button color="accent" (click)="postFiles()">Processar arquivos</button>
+      <button mat-flat-button color="primary" (click)="clearFiles()">Limpar arquivos</button>
+      <button mat-flat-button color="primary" (click)="postFiles()">Processar arquivos</button>
     </div>
   </div>
 </div>

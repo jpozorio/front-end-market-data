@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http';
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 interface DaySummary {
   day;
@@ -14,13 +14,13 @@ interface DaySummary {
   templateUrl: './ir-calculator.component.html',
   styleUrls  : ['./ir-calculator.component.scss'],
 })
-export class IrCalculatorComponent {
+export class IrCalculatorComponent implements OnInit, OnDestroy {
 
-  fileToUpload: File = null;
   files: any[] = [];
   dayTradeSummaryDays: DaySummary[] = [];
   total: DaySummary;
   processando = false;
+  droping = false;
 
   displayedColumns: string[] = [
     'day',
@@ -42,13 +42,42 @@ export class IrCalculatorComponent {
     };
   }
 
+  ngOnDestroy(): void {
+    window.removeEventListener('dragenter', e => {
+      this.droping = false;
+    });
+  }
+
+  ngOnInit(): void {
+    window.addEventListener('dragenter', e => {
+      this.droping = true;
+    });
+  }
+
+  uploadFileAllPage(event) {
+    // event.dataTransfer.dropEffect = 'copy';
+    event.preventDefault();
+    for (const file of event.dataTransfer.files) {
+      this.files.push(file);
+    }
+    this.droping = false;
+  }
+
   uploadFile(event) {
-    this.fileToUpload = event[0];
     // tslint:disable-next-line:prefer-for-of
     for (let index = 0; index < event.length; index++) {
       const element = event[index];
       this.files.push(element);
     }
+  }
+
+  allowDrag($event: DragEvent) {
+    // event.dataTransfer.dropEffect = 'copy';
+    $event.preventDefault();
+  }
+
+  dragLeave($event: DragEvent) {
+    this.droping = false;
   }
 
   deleteAttachment(index) {

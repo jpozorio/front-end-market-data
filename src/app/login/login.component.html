@@ -16,12 +16,15 @@
       <div>
         <mat-form-field appearance="fill" class="login-form--field" color="accent">
           <mat-label>Senha</mat-label>
-          <input [(ngModel)]="password" type="email" id="password" name="password" matInput required>
+          <input [(ngModel)]="password" [type]="hide ? 'password' : 'text'" matInput required>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
         </mat-form-field>
       </div>
       <div class="login-form--flex-space-between">
-        <button class="login-form--flex-1-flex-center" mat-flat-button color="accent">Login</button>
-        <button class="login-form--flex-1-flex-center" mat-stroked-button color="accent" (click)="login=false">Criar conta</button>
+        <button class="login-form--flex-1-flex-center" mat-flat-button color="primary" (click)="authenticate()">Login</button>
+        <button class="login-form--flex-1-flex-center" mat-stroked-button color="primary" (click)="login=false">Criar conta</button>
       </div>
     </div>
     <div class="login-form--right" id="criar" *ngIf="!login">
@@ -65,8 +68,8 @@
         </mat-form-field>
       </div>
       <div class="login-form--flex-space-between">
-        <button class="login-form--flex-1-flex-center" mat-flat-button color="accent">Criar conta</button>
-        <button class="login-form--flex-1-flex-center" mat-stroked-button color="accent" (click)="login=true">Ir para login</button>
+        <button class="login-form--flex-1-flex-center" mat-flat-button color="primary">Criar conta</button>
+        <button class="login-form--flex-1-flex-center" mat-stroked-button color="primary" (click)="login=true">Ir para login</button>
       </div>
     </div>
   </div>
