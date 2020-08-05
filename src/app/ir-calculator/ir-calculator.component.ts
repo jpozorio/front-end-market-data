@@ -1,13 +1,8 @@
 import {HttpClient} from '@angular/common/http';
 import {Component, OnDestroy, OnInit} from '@angular/core';
-
-interface DaySummary {
-  day;
-  brutoDayTrade: 0.00;
-  liquidoDayTrade: 0.00;
-  impostoRetido: 0.00;
-  impostoTotal: 0.00;
-}
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
+import {ApiService} from '../api.service';
 
 @Component({
   selector   : 'app-ir-calculator',
@@ -17,29 +12,16 @@ interface DaySummary {
 export class IrCalculatorComponent implements OnInit, OnDestroy {
 
   files: any[] = [];
-  dayTradeSummaryDays: DaySummary[] = [];
-  total: DaySummary;
   processando = false;
   droping = false;
 
-  displayedColumns: string[] = [
-    'day',
-    'brutoDayTrade',
-    'liquidoDayTrade',
-    'impostoRetido',
-    'impostoTotal',
-    'impostoDevido',
-  ];
-
-  constructor(public httpClient: HttpClient) {
+  constructor(
+    private readonly httpClient: HttpClient,
+    private readonly route: Router,
+    public readonly snackBar: MatSnackBar,
+    public readonly apiService: ApiService,
+  ) {
     this.processando = false;
-    this.total = {
-      day            : null,
-      brutoDayTrade  : 0.00,
-      liquidoDayTrade: 0.00,
-      impostoRetido  : 0.00,
-      impostoTotal   : 0.00,
-    };
   }
 
   ngOnDestroy(): void {
@@ -89,43 +71,19 @@ export class IrCalculatorComponent implements OnInit, OnDestroy {
   }
 
   postFiles(): void {
-    const endpoint = '/market-data/ir-calculator/calculate';
-    const formData: FormData = new FormData();
     this.processando = true;
 
-    // tslint:disable-next-line:prefer-for-of
-    for (let index = 0; index < this.files.length; index++) {
-      const currentFile = this.files[index];
-      formData.append('file', currentFile, currentFile.name);
-    }
+    this.apiService
+        .postFiles(this.files).subscribe((resp: any) => {
 
-    this.httpClient
-        .post(endpoint, formData, {}).subscribe((resp: any) => {
-        this.total = {
-          day            : null,
-          brutoDayTrade  : 0.00,
-          liquidoDayTrade: 0.00,
-          impostoRetido  : 0.00,
-          impostoTotal   : 0.00,
-        };
-
-        for (const el of resp) {
-          const item: DaySummary = {
-            day            : el.day,
-            brutoDayTrade  : el.brutoDayTrade,
-            liquidoDayTrade: el.liquidoDayTrade,
-            impostoRetido  : el.impostoRetido,
-            impostoTotal   : el.impostoTotal,
-          };
-
-          this.total.brutoDayTrade += item.brutoDayTrade;
-          this.total.liquidoDayTrade += item.liquidoDayTrade;
-          this.total.impostoRetido += item.impostoRetido;
-          this.total.impostoTotal += item.impostoTotal;
-
-          this.dayTradeSummaryDays.push(item);
+        if (resp.fileRequirePassword === true) {
+          this.snackBar.open('fileRequirePassword!');
+        } else if (resp === true) {
+          this.route.navigate(['ir-list']);
+        } else {
+          this.snackBar.open('Falha no engano!');
         }
-        this.dayTradeSummaryDays.push(this.total);
+
         this.processando = false;
       },
     )

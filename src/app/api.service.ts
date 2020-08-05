@@ -42,4 +42,25 @@ export class ApiService {
   authenticate(user): Observable<any> {
     return this.http.post('/market-data/login', user);
   }
+
+  postFiles(files: any[]): Observable<any> {
+    const formData: FormData = new FormData();
+
+    // tslint:disable-next-line:prefer-for-of
+    for (let index = 0; index < files.length; index++) {
+      const currentFile = files[index];
+      formData.append('file', currentFile, currentFile.name);
+    }
+    const endpoint = '/market-data/ir-calculator/calculate';
+
+    return this.http
+               .post(endpoint, formData, {});
+  }
+
+  listIrData(): Observable<any> {
+    const endpoint = '/market-data/ir-list/list';
+
+    return this.http
+               .get(endpoint, {});
+  }
 }

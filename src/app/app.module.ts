@@ -28,6 +28,7 @@ import {BasicAuthHtppInterceptorService} from './auth/basic-auth-htpp-intercepto
 import {DolarComponent} from './dolar/dolar.component';
 import {DolarService} from './dolar/dolar.service';
 import {IrCalculatorComponent} from './ir-calculator/ir-calculator.component';
+import {IrListComponent} from './ir-list/ir-list.component';
 import {LoginComponent} from './login/login.component';
 import {StocksComponent} from './stocks/stocks.component';
 import {StockService} from './stocks/stocks.service';
@@ -42,6 +43,7 @@ export function getToken(): string {
     DolarComponent,
     StocksComponent,
     IrCalculatorComponent,
+    IrListComponent,
     LoginComponent,
   ],
   imports     : [

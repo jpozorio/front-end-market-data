@@ -32,8 +32,8 @@ export class LoginComponent {
   authenticate() {
     this.apiService.authenticate({username: this.email, password: this.password}).subscribe(o => {
       const accessToken = o.access_token;
-      const decodedToken = this.jwtHelper.decodeToken(accessToken);
       sessionStorage.setItem('token', accessToken);
+      this.router.navigate(['ir-calculator']);
     });
   }
 }

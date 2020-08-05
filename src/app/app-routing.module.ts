@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AuthGuardService} from './auth/auth-guard.service';
 import {DolarComponent} from './dolar/dolar.component';
 import {IrCalculatorComponent} from './ir-calculator/ir-calculator.component';
+import {IrListComponent} from './ir-list/ir-list.component';
 import {LoginComponent} from './login/login.component';
 import {StocksComponent} from './stocks/stocks.component';
 
@@ -13,6 +14,10 @@ const routes: Routes = [
   {path: 'stocks', component: StocksComponent},
   {
     path       : 'ir-calculator', component: IrCalculatorComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path       : 'ir-list', component: IrListComponent,
     canActivate: [AuthGuardService],
   },
 ];
