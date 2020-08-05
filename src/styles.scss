@@ -40,12 +40,12 @@ body {
 @include mat-core();
 
 $light-primary: mat-palette($mat-teal, 900);
-$light-accent: mat-palette($mat-teal, 500);
+$light-accent: mat-palette($mat-deep-orange, 900);
 $light-theme: mat-light-theme($light-primary, $light-accent);
 
 //dark-theme
 $dark-primary: mat-palette($mat-teal, 300);
-$dark-accent: mat-palette($mat-teal, A400);
+$dark-accent: mat-palette($mat-deep-orange, 300);
 $dark-theme: mat-dark-theme($dark-primary, $dark-accent);
 //dark-theme
 
