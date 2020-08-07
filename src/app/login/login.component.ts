@@ -36,4 +36,17 @@ export class LoginComponent {
       this.router.navigate(['ir-calculator']);
     });
   }
+
+  createUser() {
+    this.apiService.createUser({
+        email    : this.email,
+        firstName: this.firstName,
+        lastName : this.lastName,
+        username : this.email,
+        password : this.password,
+      },
+    ).subscribe(o => {
+      this.login = true;
+    });
+  }
 }
