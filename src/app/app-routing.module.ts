@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AuthGuardService} from './auth/auth-guard.service';
 import {DolarComponent} from './dolar/dolar.component';
 import {IrCalculatorComponent} from './ir-calculator/ir-calculator.component';
+import {IrGroupedByMonthComponent} from './ir-grouped-by-month/ir-grouped-by-month.component';
 import {IrListComponent} from './ir-list/ir-list.component';
 import {LoginComponent} from './login/login.component';
 import {StocksComponent} from './stocks/stocks.component';
@@ -18,6 +19,10 @@ const routes: Routes = [
   },
   {
     path       : 'ir-list', component: IrListComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path       : 'ir-month-list', component: IrGroupedByMonthComponent,
     canActivate: [AuthGuardService],
   },
 ];

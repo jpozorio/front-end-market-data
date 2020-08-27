@@ -1,0 +1,7 @@
+@import '~@angular/material/theming';
+
+@mixin ir-list-component-theme($theme) {
+  .ir-list--prejuizo {
+    color: map-get(mat-color($theme, accent), default);;
+  }
+}

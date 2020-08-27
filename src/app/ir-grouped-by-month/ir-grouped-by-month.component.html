@@ -1,10 +1,10 @@
 <div class="ir-list--container ir-list--margin-50">
 
-  <mat-table [dataSource]="dayTradeSummaryDays" class="mat-elevation-z8">
+  <mat-table [dataSource]="dayTradeSummaryMonths" class="mat-elevation-z8">
     <!-- Position Column -->
-    <ng-container matColumnDef="day">
-      <mat-header-cell *matHeaderCellDef> Dia</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.day ? (element.day | date:'dd/MM/yyyy':'UTC') : 'Total' }} </mat-cell>
+    <ng-container matColumnDef="month">
+      <mat-header-cell *matHeaderCellDef> Mês</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.month | date:'MM/yyyy':'UTC'  }} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
@@ -30,10 +30,17 @@
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="liquidoDayTrade">
-      <mat-header-cell *matHeaderCellDef> Resultado líquido</mat-header-cell>
-      <mat-cell     *matCellDef="let element"
-                    [class.ir-list--prejuizo]="element.liquidoDayTrade < 0"
+      <mat-header-cell *matHeaderCellDef> Resultado líquido mês</mat-header-cell>
+      <mat-cell *matCellDef="let element"
+                [class.ir-list--prejuizo]="element.liquidoDayTrade < 0"
       > R$ {{element.liquidoDayTrade|number:'1.2-2'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="impostoBase">
+      <mat-header-cell *matHeaderCellDef>Base para imposto</mat-header-cell>
+      <mat-cell *matCellDef="let element"
+                [class.ir-list--prejuizo]="element.baseParaImposto < 0"
+      > R$ {{element.baseParaImposto|number:'1.2-2'}}</mat-cell>
     </ng-container>
 
     <!-- Symbol Column -->

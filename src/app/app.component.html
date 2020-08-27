@@ -31,9 +31,13 @@
         <mat-icon>receipt</mat-icon>
         Ações </a>
       <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/ir-calculator'">
+        <mat-icon>cloud_upload</mat-icon>
+        Adicionar notas </a>
+      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/ir-list'">
         <mat-icon>calculate</mat-icon>
-        Calculadora de IR </a>
-      <a mat-list-item (click)="sidenav.toggle()" href="">
+        Calculadora de IR
+      </a>
+      <a mat-list-item (click)="sidenav.close()">
         <mat-icon>close</mat-icon>
         Fechar</a>
 

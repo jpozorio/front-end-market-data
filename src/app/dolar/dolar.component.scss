@@ -41,7 +41,7 @@ table {
 }
 
 .highlight {
-  background-color: #fbfbfb2e
+  background-color: #86868682
 }
 
 .variacao-ajuste-fechamento {
@@ -55,4 +55,16 @@ table {
   align-items: center;
   justify-content: center;
   display: flex;
+}
+
+.mat-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-header-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

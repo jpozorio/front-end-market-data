@@ -23,7 +23,11 @@ export class ApiService {
     return this.http.get('/market-data/dolar/ativosDayTrade');
   }
 
-  downloadData(appComponent: AppComponent, stockService: StockService, dolarService: DolarService) {
+  downloadData(
+    appComponent: AppComponent,
+    stockService: StockService,
+    dolarService: DolarService,
+  ) {
     return this.http.get('/market-data/dolar/download').subscribe(r => {
       appComponent.atualizando = false;
       stockService.subscribeStockData();
@@ -53,14 +57,25 @@ export class ApiService {
     }
     const endpoint = '/market-data/ir-calculator/calculate';
 
-    return this.http
-               .post(endpoint, formData, {});
+    return this.http.post(endpoint, formData, {});
+  }
+
+  processFiles(filesPassword: string): Observable<any> {
+    const endpoint = '/market-data/ir-calculator/process-pending-notes?filesPassword=' + filesPassword;
+
+    return this.http.post(endpoint, {});
   }
 
   listIrData(): Observable<any> {
     const endpoint = '/market-data/ir-list/list';
 
-    return this.http
-               .get(endpoint, {});
+    return this.http.get(endpoint, {});
   }
+
+  listIrGroupedByMonth(): Observable<any> {
+    const endpoint = '/market-data/ir-list-by-month/list';
+
+    return this.http.get(endpoint, {});
+  }
+
 }

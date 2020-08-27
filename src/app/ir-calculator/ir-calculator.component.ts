@@ -1,8 +1,10 @@
 import {HttpClient} from '@angular/common/http';
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {ApiService} from '../api.service';
+import {PasswordRequiredComponent} from './password-required-dialog/password-required.component';
 
 @Component({
   selector   : 'app-ir-calculator',
@@ -13,13 +15,17 @@ export class IrCalculatorComponent implements OnInit, OnDestroy {
 
   files: any[] = [];
   processando = false;
+  uploading = false;
+  importing = false;
   droping = false;
+  filePassword = '';
 
   constructor(
     private readonly httpClient: HttpClient,
     private readonly route: Router,
     public readonly snackBar: MatSnackBar,
     public readonly apiService: ApiService,
+    public dialog: MatDialog,
   ) {
     this.processando = false;
   }
@@ -72,14 +78,16 @@ export class IrCalculatorComponent implements OnInit, OnDestroy {
 
   postFiles(): void {
     this.processando = true;
+    this.uploading = true;
 
     this.apiService
         .postFiles(this.files).subscribe((resp: any) => {
+        this.uploading = false;
 
-        if (resp.fileRequirePassword === true) {
-          this.snackBar.open('fileRequirePassword!');
+        if (resp.password_required === true) {
+          this.openDialog();
         } else if (resp === true) {
-          this.route.navigate(['ir-list']);
+          this.processFiles();
         } else {
           this.snackBar.open('Falha no engano!');
         }
@@ -88,5 +96,29 @@ export class IrCalculatorComponent implements OnInit, OnDestroy {
       },
     )
     ;
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PasswordRequiredComponent, {
+      width: '250px',
+      data : {filePassword: this.filePassword},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.processFiles();
+    });
+  }
+
+  private processFiles() {
+    this.importing = true;
+    this.apiService.processFiles(this.filePassword)
+        .subscribe((resp: any) => {
+          if (resp === true) {
+            this.route.navigate(['ir-list']);
+          } else {
+            this.snackBar.open('Falha no engano!');
+          }
+          this.importing = false;
+        });
   }
 }

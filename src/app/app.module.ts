@@ -28,6 +28,8 @@ import {BasicAuthHtppInterceptorService} from './auth/basic-auth-htpp-intercepto
 import {DolarComponent} from './dolar/dolar.component';
 import {DolarService} from './dolar/dolar.service';
 import {IrCalculatorComponent} from './ir-calculator/ir-calculator.component';
+import {PasswordRequiredComponent} from './ir-calculator/password-required-dialog/password-required.component';
+import {IrGroupedByMonthComponent} from './ir-grouped-by-month/ir-grouped-by-month.component';
 import {IrListComponent} from './ir-list/ir-list.component';
 import {LoginComponent} from './login/login.component';
 import {StocksComponent} from './stocks/stocks.component';
@@ -43,8 +45,10 @@ export function getToken(): string {
     DolarComponent,
     StocksComponent,
     IrCalculatorComponent,
+    IrGroupedByMonthComponent,
     IrListComponent,
     LoginComponent,
+    PasswordRequiredComponent,
   ],
   imports     : [
     JwtModule.forRoot({
