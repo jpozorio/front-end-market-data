@@ -61,9 +61,11 @@ export class ApiService {
   }
 
   processFiles(filesPassword: string): Observable<any> {
-    const endpoint = '/market-data/ir-calculator/process-pending-notes?filesPassword=' + filesPassword;
+    const endpoint = '/market-data/ir-calculator/process-pending-notes';
 
-    return this.http.post(endpoint, {});
+    return this.http.post(endpoint, {
+      filesPassword: filesPassword,
+    });
   }
 
   listIrData(): Observable<any> {
@@ -73,7 +75,7 @@ export class ApiService {
   }
 
   listIrGroupedByMonth(): Observable<any> {
-    const endpoint = '/market-data/ir-list-by-month/list';
+    const endpoint = '/market-data/ir-list/ir-list-by-month';
 
     return this.http.get(endpoint, {});
   }

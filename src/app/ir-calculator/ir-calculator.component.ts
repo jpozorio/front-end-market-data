@@ -86,7 +86,7 @@ export class IrCalculatorComponent implements OnInit, OnDestroy {
 
         if (resp.password_required === true) {
           this.openDialog();
-        } else if (resp === true) {
+        } else if (resp.password_required === false) {
           this.processFiles();
         } else {
           this.snackBar.open('Falha no engano!');
@@ -105,6 +105,7 @@ export class IrCalculatorComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.filePassword = result.filePassword;
       this.processFiles();
     });
   }

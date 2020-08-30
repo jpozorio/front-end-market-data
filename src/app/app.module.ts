@@ -33,6 +33,7 @@ import {PasswordRequiredComponent} from './ir-calculator/password-required-dialo
 import {IrGroupedByMonthComponent} from './ir-grouped-by-month/ir-grouped-by-month.component';
 import {IrListComponent} from './ir-list/ir-list.component';
 import {LoginComponent} from './login/login.component';
+import {NotaCorretagemListComponent} from './nota-corretagem-list/nota-corretagem-list.component';
 import {StocksComponent} from './stocks/stocks.component';
 import {StockService} from './stocks/stocks.service';
 
@@ -50,6 +51,7 @@ export function getToken(): string {
     IrListComponent,
     LoginComponent,
     PasswordRequiredComponent,
+    NotaCorretagemListComponent,
   ],
   imports     : [
     JwtModule.forRoot({

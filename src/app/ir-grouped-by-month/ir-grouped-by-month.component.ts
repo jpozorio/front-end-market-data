@@ -22,6 +22,7 @@ export class IrGroupedByMonthComponent implements OnInit {
     'month',
     'brutoDayTrade',
     'liquidoDayTrade',
+    'impostoBase',
     'impostoRetido',
     'impostoTotal',
     'impostoDevido',

@@ -35,7 +35,11 @@
         Adicionar notas </a>
       <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/ir-list'">
         <mat-icon>calculate</mat-icon>
-        Calculadora de IR
+        Resultados por dia
+      </a>
+      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/ir-month-list'">
+        <mat-icon>calculate</mat-icon>
+        Resultados por mês
       </a>
       <a mat-list-item (click)="sidenav.close()">
         <mat-icon>close</mat-icon>

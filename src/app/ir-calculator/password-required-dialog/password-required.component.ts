@@ -19,7 +19,7 @@ export class PasswordRequiredComponent {
   }
 
   okClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(this.data);
   }
 
 }
