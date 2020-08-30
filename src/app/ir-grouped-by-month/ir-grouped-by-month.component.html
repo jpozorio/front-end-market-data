@@ -27,7 +27,7 @@
       <mat-header-cell *matHeaderCellDef> Imposto total</mat-header-cell>
       <mat-cell *matCellDef="let element"> R$ {{
         (
-          element.impostoAPagar > 0 ? element.impostoTotal : 0
+          element.impostoAPagar > 0 ? element.impostoAPagar : 0
         )
           |number:'1.2-2'}} </mat-cell>
     </ng-container>
@@ -51,7 +51,7 @@
     <ng-container matColumnDef="impostoDevido">
       <mat-header-cell *matHeaderCellDef> Imposto devido</mat-header-cell>
       <mat-cell *matCellDef="let element; let i = index">
-        R$ {{(element.impostoAPagar)|number:'1.2-2'}}
+        R$ {{(element.impostoAPagar > 0 ? element.impostoAPagar - element.impostoRetido : 0)|number:'1.2-2'}}
       </mat-cell>
     </ng-container>
 
