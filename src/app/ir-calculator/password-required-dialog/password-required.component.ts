@@ -22,4 +22,11 @@ export class PasswordRequiredComponent {
     this.dialogRef.close(this.data);
   }
 
+  onKeyUp($event: KeyboardEvent): void {
+    const key = $event.key;
+    if (key === 'Enter') {
+      this.dialogRef.close(this.data);
+    }
+  }
+
 }
