@@ -22,8 +22,11 @@ export class IrListComponent implements OnInit {
   displayedColumns: string[] = [
     'day',
     'brutoDayTrade',
-    'liquidoDayTrade',
     'impostoRetido',
+    'taxasOperacionais',
+    'custoBolsa',
+    'custoTotal',
+    'liquidoDayTrade',
     'impostoTotal',
     'impostoDevido',
   ];
