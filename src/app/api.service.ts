@@ -28,7 +28,7 @@ export class ApiService {
     stockService: StockService,
     dolarService: DolarService,
   ) {
-    return this.http.get('/market-data/dolar/download').subscribe(r => {
+    return this.http.get('/market-data/b3-integration/download-market-data').subscribe(r => {
       appComponent.atualizando = false;
       stockService.subscribeStockData();
       dolarService.subscribeDolarData();

@@ -5,17 +5,23 @@
     </button>
     <h1>IR para day trade</h1>
     <span class="menu-spacer"></span>
-    <div style="position: absolute;right: 10px">
-      <button mat-button (click)="onSetTheme()">
-        <mat-icon>sync_alt</mat-icon>
-        Tema
-      </button>
+    <div class="app-component--right-buttons">
       <button *ngIf="adminMode && !atualizando" mat-button (click)="downloadData()">
         <mat-icon>update</mat-icon>&nbsp;Atualizar
       </button>
       <button *ngIf="adminMode && atualizando" mat-button>
         <mat-icon class="spin-icon">refresh</mat-icon>&nbsp;Atualizando...
       </button>
+      <div class="app-component--photo" *ngIf="isLogged()">
+        <mat-icon [matMenuTriggerFor]="menu">account_circle</mat-icon>
+        <mat-menu #menu="matMenu">
+          <div> Olá, {{getFirstName()}} </div>
+          <button mat-button (click)="toggleTheme()">
+            <mat-icon>sync_alt</mat-icon>
+            Trocar tema
+          </button>
+        </mat-menu>
+      </div>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -41,10 +47,6 @@
         <mat-icon>calculate</mat-icon>
         Resultados por mês
       </a>
-      <a mat-list-item (click)="sidenav.close()">
-        <mat-icon>close</mat-icon>
-        Fechar</a>
-
     </mat-nav-list>
   </mat-sidenav>
   <router-outlet></router-outlet>

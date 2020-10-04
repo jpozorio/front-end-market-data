@@ -2,6 +2,7 @@ import {OverlayContainer} from '@angular/cdk/overlay';
 import {Component, HostBinding, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ApiService} from './api.service';
+import {AuthService} from './auth/auth.service';
 import {DolarService} from './dolar/dolar.service';
 import {StockService} from './stocks/stocks.service';
 
@@ -13,6 +14,10 @@ import {StockService} from './stocks/stocks.service';
 export class AppComponent implements OnInit {
   title = 'Dados B3';
 
+  DARK_THEME = 'app-dark-theme';
+  LIGHT_THEME = 'app-light-theme';
+  THEME_STORAGE_KEY = 'theme';
+
   @HostBinding('class') activeThemeCssClass: string;
   activeTheme = '';
   adminMode = false;
@@ -20,6 +25,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     public apiService: ApiService,
+    private authService: AuthService,
     public stockService: StockService,
     public dolarService: DolarService,
     public route: ActivatedRoute,
@@ -32,13 +38,18 @@ export class AppComponent implements OnInit {
     this.apiService.downloadData(this, this.stockService, this.dolarService);
   }
 
-  onSetTheme() {
-    if (this.activeTheme === 'app-dark-theme') {
-      this.activeTheme = 'app-light-theme';
+  toggleTheme() {
+    if (this.activeTheme === this.DARK_THEME) {
+      this.activeTheme = this.LIGHT_THEME;
     } else {
-      this.activeTheme = 'app-dark-theme';
+      this.activeTheme = this.DARK_THEME;
     }
 
+    sessionStorage.setItem(this.THEME_STORAGE_KEY, this.activeTheme);
+    this.setActiveThemeClass();
+  }
+
+  private setActiveThemeClass() {
     const classList = this.overlayContainer.getContainerElement().classList;
     if (classList.contains(this.activeThemeCssClass)) {
       classList.replace(this.activeThemeCssClass, this.activeTheme);
@@ -49,10 +60,27 @@ export class AppComponent implements OnInit {
     this.activeThemeCssClass = this.activeTheme;
   }
 
+  setThemeOnInit() {
+    const theme = sessionStorage.getItem(this.THEME_STORAGE_KEY);
+    if (!theme) {
+      sessionStorage.setItem(this.THEME_STORAGE_KEY, this.DARK_THEME);
+    }
+    this.activeTheme = theme;
+    this.setActiveThemeClass();
+  }
+
+  isLogged(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
+  getFirstName(): string {
+    return this.authService.getFirstName();
+  }
+
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.adminMode = params.adminMode;
     });
-    this.onSetTheme();
+    this.setThemeOnInit();
   }
 }

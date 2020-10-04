@@ -89,10 +89,9 @@ export class IrCalculatorComponent implements OnInit, OnDestroy {
         } else if (resp.password_required === false) {
           this.processFiles();
         } else {
-          this.snackBar.open('Falha no engano!');
+          this.processando = false;
+          this.snackBar.open('Falha no engano!', null, {duration: 2});
         }
-
-        this.processando = false;
       },
     )
     ;
@@ -115,10 +114,13 @@ export class IrCalculatorComponent implements OnInit, OnDestroy {
     this.apiService.processFiles(this.filePassword)
         .subscribe((resp: any) => {
           if (resp === true) {
-            this.route.navigate(['ir-list']);
+            this.route.navigate(['ir-month-list']);
+            this.snackBar.open('Arquivos processados com sucesso!', null, {duration: 2});
           } else {
-            this.snackBar.open('Falha no engano!');
+            this.snackBar.open('Falha no engano!', null, {duration: 2});
           }
+
+          this.processando = false;
           this.importing = false;
         });
   }

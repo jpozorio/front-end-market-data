@@ -34,3 +34,21 @@
 mat-nav-list mat-icon {
   margin-right: .5em;
 }
+
+
+.app-component--right-buttons {
+  position: absolute;
+  right: 10px;
+  display: flex
+}
+
+.app-component--photo {
+  height: 2em;
+  width: 2em;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1em;
+  cursor: pointer;
+}
