@@ -2,6 +2,12 @@
 
   <mat-table [dataSource]="dayTradeSummaryDays" class="mat-elevation-z8">
     <!-- Position Column -->
+    <ng-container matColumnDef="brokerName">
+      <mat-header-cell *matHeaderCellDef> Corretora</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.notaNegociacao.broker }} </mat-cell>
+    </ng-container>
+
+    <!-- Position Column -->
     <ng-container matColumnDef="day">
       <mat-header-cell *matHeaderCellDef> Dia</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.day ? (element.day | date:'dd/MM/yyyy':'UTC') : 'Total' }} </mat-cell>

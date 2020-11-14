@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
 
   @HostBinding('class') activeThemeCssClass: string;
   activeTheme = '';
-  adminMode = false;
   atualizando = false;
 
   constructor(
@@ -65,7 +64,7 @@ export class AppComponent implements OnInit {
     if (!theme) {
       sessionStorage.setItem(this.THEME_STORAGE_KEY, this.DARK_THEME);
     }
-    this.activeTheme = theme;
+    this.activeTheme = theme ? theme : this.DARK_THEME;
     this.setActiveThemeClass();
   }
 
@@ -78,9 +77,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.adminMode = params.adminMode;
-    });
     this.setThemeOnInit();
   }
 }

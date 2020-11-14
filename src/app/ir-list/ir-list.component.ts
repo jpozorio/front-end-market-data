@@ -20,6 +20,7 @@ export class IrListComponent implements OnInit {
   total: DaySummary;
 
   displayedColumns: string[] = [
+    'brokerName',
     'day',
     'brutoDayTrade',
     'impostoRetido',

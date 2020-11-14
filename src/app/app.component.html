@@ -6,12 +6,6 @@
     <h1>IR para day trade</h1>
     <span class="menu-spacer"></span>
     <div class="app-component--right-buttons">
-      <button *ngIf="adminMode && !atualizando" mat-button (click)="downloadData()">
-        <mat-icon>update</mat-icon>&nbsp;Atualizar
-      </button>
-      <button *ngIf="adminMode && atualizando" mat-button>
-        <mat-icon class="spin-icon">refresh</mat-icon>&nbsp;Atualizando...
-      </button>
       <div class="app-component--photo" *ngIf="isLogged()">
         <mat-icon [matMenuTriggerFor]="menu">account_circle</mat-icon>
         <mat-menu #menu="matMenu">
