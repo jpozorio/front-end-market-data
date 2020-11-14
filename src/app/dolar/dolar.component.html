@@ -1,5 +1,5 @@
-<mat-card style="display: flex; justify-content: space-between">
-  <div style="width: 15%; padding-right: 20px">
+<mat-card style="display: flex; justify-content: space-between; flex-direction: row">
+  <div style="display: flex;flex-grow: .1;flex-direction: column">
     <div style="padding: 10px;margin: 5px">
       Contrato vigente: <b>{{currentContract}}</b>
     </div>
@@ -20,7 +20,7 @@
     </mat-card>
   </div>
 
-  <mat-table [dataSource]="dataSource" style="width: 75%; padding-right: 20px" class="mat-elevation-z8">
+  <mat-table [dataSource]="dataSource" style="display: flex;flex-grow: 1;flex-direction: column;" class="mat-elevation-z8">
     <!-- Position Column -->
     <ng-container matColumnDef="day">
       <mat-header-cell *matHeaderCellDef> Data</mat-header-cell>
@@ -74,25 +74,27 @@
     ></mat-row>
   </mat-table>
 
-  <mat-card style="width: 12%;">
-    <div class="ajuste  centralizado" style="padding: 10px;">Variações ajuste</div>
-    <div *ngFor="let variation of variationsAjuste" [class.ajuste1]="variation.numberVariation < 2 && variation.numberVariation > -2">
-      <div class="variacao-ajuste-fechamento">
-        <!--        <div>{{variation.label}}</div>-->
-        <div>{{variation.numberVariation|number:'1.1-1'}}%</div>
-        <div>{{variation.value|number:'1.2-2'}}</div>
+  <div style="display: flex;flex-grow: .2;flex-direction: row;">
+    <mat-card style="display: flex;flex: .5;flex-direction: column;">
+      <div class="ajuste  centralizado" style="padding: 10px;">Variações ajuste</div>
+      <div *ngFor="let variation of variationsAjuste" [class.ajuste1]="variation.numberVariation < 2 && variation.numberVariation > -2">
+        <div class="variacao-ajuste-fechamento">
+          <!--        <div>{{variation.label}}</div>-->
+          <div>{{variation.numberVariation|number:'1.1-1'}}%</div>
+          <div>{{variation.value|number:'1.2-2'}}</div>
+        </div>
       </div>
-    </div>
-  </mat-card>
+    </mat-card>
 
-  <mat-card style="width: 12%; align-items: center;justify-content: center">
-    <div class="fechamento centralizado" style="padding: 10px;">Variações fechamento</div>
-    <div *ngFor="let variation of variationsLastPrice" [class.fechamento1]="variation.numberVariation < 2 && variation.numberVariation > -2">
-      <div class="variacao-ajuste-fechamento">
-        <!--        <div>{{variation.label}}</div>-->
-        <div>{{variation.numberVariation|number:'1.1-1'}}%</div>
-        <div>{{variation.value|number:'1.2-2'}}</div>
+    <mat-card style="display: flex;flex: .5;flex-direction: column;">
+      <div class="fechamento centralizado" style="padding: 10px;">Variações fechamento</div>
+      <div *ngFor="let variation of variationsLastPrice" [class.fechamento1]="variation.numberVariation < 2 && variation.numberVariation > -2">
+        <div class="variacao-ajuste-fechamento">
+          <!--        <div>{{variation.label}}</div>-->
+          <div>{{variation.numberVariation|number:'1.1-1'}}%</div>
+          <div>{{variation.value|number:'1.2-2'}}</div>
+        </div>
       </div>
-    </div>
-  </mat-card>
+    </mat-card>
+  </div>
 </mat-card>

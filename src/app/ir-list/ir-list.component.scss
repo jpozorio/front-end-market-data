@@ -1,0 +1,28 @@
+@import '~@angular/material/theming';
+@import '../../styles';
+
+.ir-list--container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.ir-list--margin-50 {
+  margin-bottom: 50px;
+}
+
+.mat-cell {
+  //mudar de acordo com o tamanho da tela
+  //font-size: 10px !important;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.mat-header-cell {
+  //mudar de acordo com o tamanho da tela
+  //font-size: 10px !important;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

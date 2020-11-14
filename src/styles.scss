@@ -1,32 +1,77 @@
 /* You can add global styles to this file, and also import other style files */
+@import "src/app/login/login.component.scss-theme";
+@import "src/app/ir-list/ir-list.component.scss-theme";
+@import "src/app/dolar/dolar.component.scss-theme";
 
-html, body {
-  height: 100%;
+html {
+  height: 100vh;
+  display: flex;
 }
 
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  height: 100vh;
+  display: flex;
+  flex: 1;
 }
 
-.mat-cell {
+.app-root-flex {
   display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mat-header-cell {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex: 1;
+  flex-direction: column;
 }
 
 @import '~@angular/material/theming';
 @include mat-core();
 
-$primary: mat-palette($mat-teal, 900);
-$accent: mat-palette($mat-orange, 200);
+$light-primary: mat-palette($mat-teal, 900);
+$light-accent: mat-palette($mat-deep-orange, 900);
+$light-theme: mat-light-theme($light-primary, $light-accent);
 
-$theme: mat-dark-theme($primary, $accent);
+//dark-theme
+$dark-primary: mat-palette($mat-teal, 300);
+$dark-accent: mat-palette($mat-deep-orange, 300);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent);
+//dark-theme
 
-@include angular-material-theme($theme);
+.mat-form-field-wrapper {
+  @extend .mat-form-field-wrapper;
+  flex: 1;
+  display: flex;
+}
+
+.app-dark-theme {
+  @include angular-material-theme($dark-theme);
+  @include login-component-theme($dark-theme);
+  @include ir-list-component-theme($dark-theme);
+  @include dolar-component-theme($dark-theme);
+  --primary-color: #{map-get($dark-primary, default)};
+  --accent-color: #{map-get($dark-accent, default)};
+  --warn-color: #ff0101;
+}
+
+.app-light-theme {
+  @include angular-material-theme($light-theme);
+  @include login-component-theme($light-theme);
+  @include ir-list-component-theme($light-theme);
+  @include dolar-component-theme($light-theme);
+  --primary-color: #{map-get($light-primary, default)};
+  --accent-color: #{map-get($light-accent, default)};
+  --warn-color: #ff0101;
+}
+
+.mat-toolbar.mat-primary {
+  background: map-get($mat-teal, 900);
+  color: map-get($mat-teal, 50);
+}
+
+.mat-cell {
+  //mudar de acordo com o tamanho da tela
+  //font-size: 10px !important;
+}
+
+.mat-header-cell {
+  //mudar de acordo com o tamanho da tela
+  //font-size: 10px !important;
+}

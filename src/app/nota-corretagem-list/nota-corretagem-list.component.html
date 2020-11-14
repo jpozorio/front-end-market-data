@@ -1,0 +1,52 @@
+<div class="ir-list--container ir-list--margin-50">
+
+  <mat-table [dataSource]="dayTradeSummaryDays" class="mat-elevation-z8">
+    <!-- Position Column -->
+    <ng-container matColumnDef="day">
+      <mat-header-cell *matHeaderCellDef> Dia</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.day ? (element.day | date:'dd/MM/yyyy':'UTC') : 'Total' }} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="brutoDayTrade">
+      <mat-header-cell *matHeaderCellDef> Resultado bruto</mat-header-cell>
+      <mat-cell
+        *matCellDef="let element"
+        [class.ir-list--prejuizo]="element.brutoDayTrade < 0"
+      > R$ {{element.brutoDayTrade|number:'1.2-2'}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="impostoRetido">
+      <mat-header-cell *matHeaderCellDef> Imposto retido</mat-header-cell>
+      <mat-cell *matCellDef="let element"> R$ {{element.impostoRetido|number:'1.2-2'}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="impostoTotal">
+      <mat-header-cell *matHeaderCellDef> Imposto total</mat-header-cell>
+      <mat-cell *matCellDef="let element"> R$ {{element.impostoTotal|number:'1.2-2'}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="liquidoDayTrade">
+      <mat-header-cell *matHeaderCellDef> Resultado líquido</mat-header-cell>
+      <mat-cell     *matCellDef="let element"
+                    [class.ir-list--prejuizo]="element.liquidoDayTrade < 0"
+      > R$ {{element.liquidoDayTrade|number:'1.2-2'}}</mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="impostoDevido">
+      <mat-header-cell *matHeaderCellDef> Imposto devido</mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index">
+        R$ {{(element.impostoTotal - element.impostoRetido)|number:'1.2-2'}}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+    ></mat-row>
+  </mat-table>
+
+</div>

@@ -12,6 +12,7 @@ table {
 
 .fechamento {
   background-color: rgba(0, 0, 0, 1);
+  color: white !important;
 }
 
 .fechamento05 {
@@ -24,6 +25,7 @@ table {
 
 .ajuste {
   background-color: rgba(0, 0, 139);
+  color: white !important;
 }
 
 .ajuste05 {
@@ -39,7 +41,7 @@ table {
 }
 
 .highlight {
-  background-color: #fbfbfb2e
+  background-color: #86868682
 }
 
 .variacao-ajuste-fechamento {
@@ -53,4 +55,16 @@ table {
   align-items: center;
   justify-content: center;
   display: flex;
+}
+
+.mat-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-header-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

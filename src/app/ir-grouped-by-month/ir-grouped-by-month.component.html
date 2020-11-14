@@ -1,0 +1,64 @@
+<div class="ir-list--container ir-list--margin-50">
+
+  <mat-table [dataSource]="dayTradeSummaryMonths" class="mat-elevation-z8">
+    <!-- Position Column -->
+    <ng-container matColumnDef="month">
+      <mat-header-cell *matHeaderCellDef> Mês</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.month | date:'MM/yyyy':'UTC'  }} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="brutoDayTrade">
+      <mat-header-cell *matHeaderCellDef> Resultado bruto</mat-header-cell>
+      <mat-cell
+        *matCellDef="let element"
+        [class.ir-list--prejuizo]="element.brutoDayTrade < 0"
+      > R$ {{element.brutoDayTrade|number:'1.2-2'}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="impostoRetido">
+      <mat-header-cell *matHeaderCellDef> Imposto retido</mat-header-cell>
+      <mat-cell *matCellDef="let element"> R$ {{element.impostoRetido|number:'1.2-2'}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="impostoTotal">
+      <mat-header-cell *matHeaderCellDef> Imposto total</mat-header-cell>
+      <mat-cell *matCellDef="let element"> R$ {{
+        (
+          element.impostoAPagar > 0 ? element.impostoAPagar : 0
+        )
+          |number:'1.2-2'}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="liquidoDayTrade">
+      <mat-header-cell *matHeaderCellDef> Resultado líquido mês</mat-header-cell>
+      <mat-cell *matCellDef="let element"
+                [class.ir-list--prejuizo]="element.liquidoDayTrade < 0"
+      > R$ {{element.liquidoDayTrade|number:'1.2-2'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="impostoBase">
+      <mat-header-cell *matHeaderCellDef>Base para imposto</mat-header-cell>
+      <mat-cell *matCellDef="let element"
+                [class.ir-list--prejuizo]="element.taxBaseValue < 0"
+      > R$ {{element.taxBaseValue|number:'1.2-2'}}</mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="impostoDevido">
+      <mat-header-cell *matHeaderCellDef> Imposto devido</mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index">
+        R$ {{(element.impostoAPagar > 0 ? element.impostoAPagar - element.impostoRetido : 0)|number:'1.2-2'}}
+      </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+    ></mat-row>
+  </mat-table>
+
+</div>
